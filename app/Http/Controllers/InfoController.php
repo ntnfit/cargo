@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Infors;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class InfoController extends Controller
 {
@@ -13,6 +15,12 @@ class InfoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+         $this->middleware('permission:infor-list', ['only' => ['index','store']]);
+         $this->middleware('permission:infor-edit', ['only' => ['edit','update']]);
+         
+    }
     public function index()
     {
         $Infors= Infors::latest()->paginate(5);

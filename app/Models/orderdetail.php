@@ -15,6 +15,8 @@ class orderdetail extends Model
     protected $fillable = [
         'order_id',
         'description',
-        'weight'
+        'weight',
+        'line',
+        'status'
     ];
 }

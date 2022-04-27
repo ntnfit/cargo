@@ -20,7 +20,7 @@ class order extends Model
         'receiver',
         'remark',
         'weight',
-        'package',
+        'value_order',
         'tax',
         'discount',
         'total'

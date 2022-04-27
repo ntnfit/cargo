@@ -117,6 +117,12 @@
                       <span class="nav-link-text">Orders</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('mawb.index') }}">
+                      <i class="ni ni-archive-2 text-yellow"></i>
+                      <span class="nav-link-text">Shipment</span>
+                    </a>
+                </li>
              
             </ul>
             <!-- Divider -->

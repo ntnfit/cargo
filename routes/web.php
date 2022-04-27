@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ReceiverController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\MawbController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,7 +51,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('customers',CustomerController::class);
 	Route::resource('receivers',ReceiverController::class);
 	Route::get('invoice/{id}',[InvoiceController::class,'print']);
-	
+	Route::get('orders/{id}',[InvoiceController::class,'print']);
+	//shipment
+	Route::resource('mawb',MawbController::class);
 });
 
 

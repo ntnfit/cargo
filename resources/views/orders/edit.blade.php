@@ -28,14 +28,25 @@
                     <select id="receiver" class="form-control" name="receiver">
                     <option value="{{$order->receiver}}">{{$order->receiver}}</option>
                     </select> 
+                    <div class="col2 text-left">
+                    <label for="service">Service</label>
+                    @if($order->service=='HCM')
+                      <input type="checkbox" class="radio" value="HCM" name="service[1][]" checked />HCM</label>
+                      <input type="checkbox" class="radio" value="TL" name="service[1][]" />TỈNH</label>
+                    @else
+                    <input type="checkbox" class="radio" value="HCM" name="service[1][]"  />HCM</label>
+                      <input type="checkbox" class="radio" value="TL" name="service[1][]" checked />TỈNH</label>
+                    @endif  
+                  </div>
                     <label for="remark">Remark</label>
                     <textarea  class="form-control"  name="remark"> </textarea>
-                    <label for="package">Package</label>
-                    <input  class="form-control" type="number" step="any" value="{{$order->package}}"name="package"/>
+                    <label>Order value</label>
+                    <input  class="form-control" type="number" step="0.01" value="{{$order->value_order}}"name="value_order" require/>
                     <label for="tax">Tax</label>
-                    <input  class="form-control" type="number" step="any" value="{{$order->tax}}"name="tax"/> 
+                    <input  class="form-control" type="number" step="any" value="{{$order->tax}}" name="tax"/> 
                     <label for="discount">discount</label>
-                    <input  class="form-control" type="number" step="any"value="{{$order->discount}}" hidden/> 
+                    <input  class="form-control" type="number" step="any" value="{{$order->discount}}" name="discount" /> 
+                    <input class="form-control" id="hidden-weight" type="number" name="weight" value="{{$order->weight}}" step="any" hidden>
           <table class="table table-bordered" id="tbl_posts">
         <thead>
           
@@ -64,7 +75,8 @@
         <tr>
           <th></th>
           <th></th>
-          <th style="color:red" "><input class="form-control" id="total-weight" type="number" name="weight" value="{{$order->weight}}" step="any" disabled></th>
+          <th style="color:red" ">
+          <input class="form-control" id="total-weight" type="number" name="weight" value="{{$order->weight}}" step="any" disabled></th>
            
           </tr>
       </table>
@@ -373,6 +385,7 @@ for(var i = 0; i < els.length; i++)
 } 
 
 $('#total-weight').val(a);
+$('#hidden-weight').val(a) 
 //document.getElementById('total-weight').innerHTML='<b>Total:'+a+'</b>';
 } //getResults function
 </script>
@@ -444,7 +457,21 @@ $('#total-weight').val(a);
     });
 });
 
-
+$("input:checkbox").on('click', function() {
+  // in the handler, 'this' refers to the box clicked on
+  var $box = $(this);
+  if ($box.is(":checked")) {
+    // the name of the box is retrieved using the .attr() method
+    // as it is assumed and expected to be immutable
+    var group = "input:checkbox[name='" + $box.attr("name") + "']";
+    // the checked state of the group/box on the other hand will change
+    // and the current value is retrieved using .prop() method
+    $(group).prop("checked", false);
+    $box.prop("checked", true);
+  } else {
+    $box.prop("checked", false);
+  }
+});
 </script>
     @include('layouts.footers.auth')
 

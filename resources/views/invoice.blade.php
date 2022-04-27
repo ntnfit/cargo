@@ -125,8 +125,8 @@
 		<td colspan=7 height="28" align="center" valign=middle><b><u><font size=4 color="#000000">Commodity - Kê Khai Mặt Hàng</font></u></b></td>
 		</tr>
 		<tr>
-		<td colspan=3 height="25" align="center" valign=middle><b><font size=4 color="#000000">Số Lượng</font></b></td>
-		<td colspan=2 align="center" valign=middle><b><font size=4 color="#000000">Mặt Hàng</font></b></td>
+		<td colspan=3 height="25" align="center" valign=middle><b><font size=4 color="#000000">Mặt Hàng</font></b></td>
+		<td colspan=2 align="center" valign=middle><b><font size=4 color="#000000">Số Lượng</font></b></td>
 		<td align="center" valign=middle><font size=4 color="#000000"><br></font></td>
 		</tr>
 		@foreach($order_detail as $detail)

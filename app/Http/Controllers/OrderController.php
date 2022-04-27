@@ -15,12 +15,30 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    function __construct()
     {
-        $orders=order::join('customers', 'orders.sender', '=', 'customers.id')
+         $this->middleware('permission:order-list|order-create|order-edit|order-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:order-create', ['only' => ['create','store']]);
+         $this->middleware('permission:order-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:order-delete', ['only' => ['destroy']]);
+    }
+    public function index(Request $request)
+    {
+        $orders=order::join('orders_detail', 'orders.id', '=', 'orders_detail.order_id')
+    ->join('customers', 'orders.sender', '=', 'customers.id')
     ->join('receivers', 'orders.receiver', '=', 'receivers.id')
-    ->select( 'orders.*','customers.name as name_sender','receivers.name as name_receivers' )
-    ->latest('orders.created_at')->paginate(10);
+    ->select( 'orders.*','orders_detail.line','customers.name as name_sender','receivers.name as name_receivers' )
+    ->latest('orders.created_at')
+    ->where([
+        ['orders.order_id','!=',Null],
+        [function ($query) use ($request) {
+            if(($term=$request->term)){
+                 $query->orwhere('orders.order_id','LIKE','%'.$term.'%')->get();
+            }
+        }],
+        ['orders_detail.status','=',0]
+        ])
+    ->paginate(10);
         return view('orders.index',compact('orders'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
     }
@@ -50,12 +68,8 @@ class OrderController extends Controller
             'weight' => 'required',
             'receiver' => 'required',
             'sender' => 'required',
-            'package' => 'required',
             'deldate' => 'required',
-            'order'=>'required'
-           
         ]);
-    
         // 
         $prefix="A-";
             $subid= order::latest('id')->first();
@@ -78,21 +92,24 @@ class OrderController extends Controller
         $data['sender'] =$request->sender;
         $data['receiver']=$request->receiver;
         $data['remark']=$request->remark;
-        $data['package']=$request->package;
+        $data['value_order']=$request->value_order;
         $data['weight']=$request->weight;
         $data['tax']=$request->tax;
         $data['discount']=$request->discount;
-        $data['total']=$request->tax + $request->discount;
+        $data['total']=$request->value_order+$request->tax - $request->discount;
+        $data['service']=$request->service['1']['0'];
         $order = order::create( $data);
         $orderID = $order->id;
             
        // return redirect()->route('products.index')
        //                 ->with('success','Product created successfully.');
         $datadetail=[];
+        $line=1;
         foreach ($request->order as $orders){
             $datadetail['order_id']=$orderID;
             $datadetail['description']=$orders['item'];
             $datadetail['weight']=$orders['weight']; 
+            $datadetail['line']=$line++;
             orderdetail::create($datadetail);
         }
        
@@ -133,9 +150,40 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
+       
+        //data processing
+        $data=[];
+        $prefix="A-";
+        $code=$prefix.str_pad( $id,5,'0',STR_PAD_LEFT);
+        $data['order_id']=$code;
+        $data['shipdate']=$request->shipdate;
+        $data['deldate']=$request->deldate;
+        $data['sender'] =$request->sender;
+        $data['receiver']=$request->receiver;
+        $data['remark']=$request->remark;
+        $data['value_order']=$request->value_order;
+        $data['weight']=$request->weight;
+        $data['tax']=$request->tax;
+        $data['discount']=$request->discount;
+        $data['total']=$request->value_order+$request->tax - $request->discount;
+        $data['service']=$request->service['1']['0'];
+        //update order
         $order = order::find($id);
-        $input = $request->all();
-        $order->update($input);
+        $order->update($data);
+        $orderID = $order->id;
+       // return redirect()->route('products.index')
+       //                 ->with('success','Product created successfully.');
+        $datadetail=[];
+        $line=1;
+        foreach ($request->order as $orders){
+            $datadetail['order_id']=$orderID;
+            $datadetail['description']=$orders['item'];
+            $datadetail['weight']=$orders['weight']; 
+            $datadetail['line']=$line++;
+            $order_detail = orderdetail::find($orderID);
+            $order_detail->update($datadetail);
+        }
+      
         return redirect()->route('orders.index')
                         ->with('success','orders updated successfully');
     }
