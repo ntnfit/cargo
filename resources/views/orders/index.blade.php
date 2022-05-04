@@ -85,6 +85,7 @@
                 <td>
                
                     <form action="/orders/{{$order->id}}/edit" method="POST">
+                    <a href="labels/{{$order->id}}">label</a>
                      <a href="invoice/{{$order->id}}"><i class="fa-solid fa-file-invoice"></i></a>
                         <a href="./orders/{{$order->id}}/edit">
                             <i class="fas fa-edit  fa-lg"></i>

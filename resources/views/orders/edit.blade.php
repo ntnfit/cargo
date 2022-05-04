@@ -30,7 +30,7 @@
                     </select> 
                     <div class="col2 text-left">
                     <label for="service">Service</label>
-                    @if($order->service=='HCM')
+                    @if($order->service =='HCM')
                       <input type="checkbox" class="radio" value="HCM" name="service[1][]" checked />HCM</label>
                       <input type="checkbox" class="radio" value="TL" name="service[1][]" />TỈNH</label>
                     @else
@@ -63,11 +63,11 @@
             $count=0
             @endphp
             @foreach($order_detail as $detail)
-            <tr id="rec-{{ $count++}}">
+            <tr id="rec-{{ ++$count}}">
                 <td><span class="sn"></span>.</td>
                 <td class="it"><input type="text" class="form-control"  value="{{$detail->description}}" name="order[{{$count}}][item]"></td>
                 <td class="wg"><input type="number" step="0.01"  value="{{$detail->weight}}" onchange="totalweight()" class="form-control weight" name="order[{{$count}}][weight]"></td>
-                <td><a class="btn btn-xs delete-record" data-id="0"><i class="glyphicon glyphicon-trash" >x</i></a></td>
+                <td><a class="btn btn-xs delete-record" data-id="{{$count}}"><i class="glyphicon glyphicon-trash" >x</i></a></td>
             </tr>
            
             @endforeach
@@ -85,7 +85,9 @@
         <div class="well clearfix">
             <a class="btn btn-primary pull-right add-record" data-added="0"><i class="glyphicon glyphicon-plus"></i> Add Row</a>
         </div>
-            <button class="btn btn-primary pull-right add-record" type="submit"></button>
+        <div class="col-12 text-center">
+          <button class=" btn btn-success "  type="submit">Save</button>
+          </div>
         </form>
 
         <div style="display:none;">
@@ -355,9 +357,9 @@ padding:15px;
      if (didConfirm == true) {
       var id = jQuery(this).attr('data-id');
       var targetDiv = jQuery(this).attr('targetDiv');
+      console.log(id);
       jQuery('#rec-' + id).remove();
-      
-    //regnerate index number on table
+          //regnerate index number on table
     $('#tbl_posts_body tr').each(function(index) {
       //alert(index);
       $(this).find('span.sn').html(index+1);

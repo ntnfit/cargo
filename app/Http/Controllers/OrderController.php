@@ -168,22 +168,35 @@ class OrderController extends Controller
         $data['total']=$request->value_order+$request->tax - $request->discount;
         $data['service']=$request->service['1']['0'];
         //update order
+        
         $order = order::find($id);
         $order->update($data);
         $orderID = $order->id;
        // return redirect()->route('products.index')
        //                 ->with('success','Product created successfully.');
         $datadetail=[];
-        $line=1;
-        foreach ($request->order as $orders){
-            $datadetail['order_id']=$orderID;
-            $datadetail['description']=$orders['item'];
-            $datadetail['weight']=$orders['weight']; 
-            $datadetail['line']=$line++;
-            $order_detail = orderdetail::find($orderID);
-            $order_detail->update($datadetail);
+        $line=0;
+        //handing remove recorde data detail
+        $a=orderdetail::where('order_id',$orderID)->count();
+        if($a > count($request->order))
+        {
+            $order_detail = orderdetail::where('order_id',$orderID)->delete();
+           
         }
-      
+       
+            foreach ($request->order as $orders=>$value){
+                $datadetail['order_id']=$orderID;
+                $datadetail['description']=$value['item'];
+                $datadetail['weight']=$value['weight']; 
+                $datadetail['line']= ++$line;
+                $order_detail = orderdetail::where('order_id',$orderID)->where('line',$line);
+                if ($order_detail->count() != 0) {
+                    $order_detail->update($datadetail);
+                } else {
+                    $order_detail =orderdetail::updateOrCreate($datadetail);
+                }
+            }
+        
         return redirect()->route('orders.index')
                         ->with('success','orders updated successfully');
     }

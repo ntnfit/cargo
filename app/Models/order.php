@@ -23,6 +23,7 @@ class order extends Model
         'value_order',
         'tax',
         'discount',
-        'total'
+        'total',
+        'service'
     ];
 }

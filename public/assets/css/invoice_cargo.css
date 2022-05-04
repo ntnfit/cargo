@@ -1,0 +1,58 @@
+body,
+div,
+table,
+thead,
+tbody,
+tfoot,
+th,
+tr,
+td,
+u,
+p {
+    font-family: "Times New Roman";
+    color: #000000;
+    word-break: break-word;
+}
+
+.largeText {
+    font-size: 16pt;
+}
+
+.mediumText {
+    font-size: 14pt;
+}
+
+.smallText {
+    font-size: 11pt;
+}
+
+body {
+    margin-right: auto;
+    margin-left: auto;
+    width: 216mm;
+    height: 279mm;
+    padding-right: 8px;
+    padding-left: 8px;
+    text-align: -webkit-center;
+}
+
+td {
+    padding: 0;
+    padding-right: 4px;
+    padding-left: 4px;
+}
+
+@page {
+    margin: 8px;
+}
+
+@media print {
+    body {
+        width: 216mm;
+        height: 279mm;
+        margin: 0;
+    }
+    img {
+        max-width: 100%
+    }
+}

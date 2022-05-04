@@ -5,14 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\order;
 use App\Models\orderdetail;
-use App\Models\infors;
-class InvoiceController extends Controller
+use App\Models\Receiver;
+class LabelController extends Controller
 {
-    public function print($id)
+    public function label($id)
     {
-        
-        $infors= Infors::latest()->first();
-       
         $orders=order::join('customers', 'orders.sender', '=', 'customers.id')
         ->join('receivers', 'orders.receiver', '=', 'receivers.id')
         ->select( 'orders.*','customers.name as name_sender','receivers.name as name_receivers', 
@@ -23,7 +20,6 @@ class InvoiceController extends Controller
         )
         ->where('orders.id',$id)->first();
         $order_detail=orderdetail::where('order_id',$id)->get();
-
-        return view('invoice',compact('orders','infors','order_detail'));
+        return view('label',compact('orders','order_detail'));
     }
 }
