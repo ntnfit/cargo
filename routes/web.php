@@ -53,7 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('receivers',ReceiverController::class);
 	Route::get('invoice/{id}',[InvoiceController::class,'print']);
 	Route::get('orders/{id}',[InvoiceController::class,'print']);
-	Route::get('labels/{id}',[LabelController::class,'label']);
+	Route::get('labels',[LabelController::class,'label']);
 	//shipment
 	Route::resource('mawb',MawbController::class);
 });

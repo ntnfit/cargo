@@ -35,20 +35,9 @@
 <body>
 <input type="submit" class="dont-print" onclick="order_print()" value="Print"></button>
 <br>
-@foreach ($order_detail as $detail)
-  <div class="label">
-    <br>{{count($order_detail)}} Box(es)
-    <br> <b style="font-size:60px">{{$orders->order_id}}</b> 
-    <br> Người Nhận
-    <br> Tên: Lê Như Ý
-    <br> Địa Chỉ:{{$orders->name_receivers}}
-    <br> Số Điện Thoại: {{$orders->phone_receivers}}
-    <br>Cân Nặng: {{$detail->weight}}
-	<br>Hàng Hóa: {{$detail->description}}
-	<br>
-  </div>
-  <div class="page-break"></div>
- @endforeach
+@php
+echo $label
+@endphp
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>

@@ -51,6 +51,7 @@
     <div class="col-4 text-right">
                             <a class="btn btn-sm btn-primary" href="{{ route('orders.create') }}">Add Order</a>
                             <button id="process" class="btn btn-sm btn-warning" disabled="true"> Process MAWB </button>
+                            <button id="label" class="btn btn-sm btn-primary" disabled="true"> Print label </button>
                          
     </div>
     <table class="table table-bordered table-responsive-lg" style="margin-left: 15px;">
@@ -85,7 +86,7 @@
                 <td>
                
                     <form action="/orders/{{$order->id}}/edit" method="POST">
-                    <a href="labels/{{$order->id}}">label</a>
+                   
                      <a href="invoice/{{$order->id}}"><i class="fa-solid fa-file-invoice"></i></a>
                         <a href="./orders/{{$order->id}}/edit">
                             <i class="fas fa-edit  fa-lg"></i>
@@ -156,14 +157,26 @@ var selectedRows = function () {
     console.log(ids);
     //deleteItem(ids);
     });
+    $('#label').on('click', function() {
+    var ids = selectedRows().join();
+    document.cookie = `label=`+ids;
+    console.log(ids);
+    window.open(
+  ' w/labels',
+  '_blank' // <- This is what makes it open in a new window.
+);
+    //deleteItem(ids);
+    });
     //Handle button process MAWB
     $(".checkbox").change(function() {
     if(this.checked) {
         document.getElementById("process").disabled = false;
+        document.getElementById("label").disabled = false;
     }
     else
     {
         document.getElementById("process").disabled = true;
+        document.getElementById("label").disabled = false;
     }
     });
       $("#list_mawb").select2({
