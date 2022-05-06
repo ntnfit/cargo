@@ -162,7 +162,7 @@ var selectedRows = function () {
     document.cookie = `label=`+ids;
     console.log(ids);
     window.open(
-  ' w/labels',
+  'http://dainamcargo.com/labels',
   '_blank' // <- This is what makes it open in a new window.
 );
     //deleteItem(ids);
