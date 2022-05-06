@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\order;
 use App\Models\orderdetail;
-use App\Models\infors;
+use App\Models\Infors;
 class InvoiceController extends Controller
 {
     public function print($id)

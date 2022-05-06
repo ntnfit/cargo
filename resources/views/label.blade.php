@@ -13,6 +13,10 @@
         margin:2px;
 		margin-top:0.2px;
         }
+        p {
+    margin-top: -1px;
+    margin-bottom: -25px;
+}
     .label{
         /* Avery 5160 labels -- CSS and HTML by MM at Boulder Information Services */
         height:14.8cm;
@@ -21,7 +25,7 @@
         text-align: left;
         overflow: hidden;
 		font-size:28px;
-        outline: 1px dotted; /* outline doesn't occupy space like border does */
+        /* outline: 1px dotted; outline doesn't occupy space like border does */
         }
     .page-break  {
         clear: left;
