@@ -12,6 +12,7 @@ p {
     font-family: "Times New Roman";
     color: #000000;
     word-break: break-word;
+    line-height: 25px;
 }
 
 .largeText {
@@ -19,11 +20,15 @@ p {
 }
 
 .mediumText {
-    font-size: 14pt;
+    font-size: 13pt;
 }
 
 .smallText {
     font-size: 11pt;
+}
+
+.underline {
+    border-bottom: 2px black solid;
 }
 
 body {
