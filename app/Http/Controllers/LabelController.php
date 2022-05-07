@@ -32,12 +32,12 @@ class LabelController extends Controller
                 <div class="label">
                 <br>'.++$key.' Box(es)
                 <br> <b style="font-size:60px">'.$orders->order_id.'-'. $order_detail->line.'</b> 
-                <br> Người Nhận
-                <br> Tên: '.$orders->name_receivers.'
-                <br> Địa Chỉ: '.$orders->name_receivers.'
-                <br> Số Điện Thoại: '.$orders->phone_receivers.'
-                <br>Cân Nặng: '.$order_detail->weight.'
-                <br>Hàng Hóa: '.$order_detail->description.'
+                <br> <p> Người Nhận </p>
+                <br> <p>Tên: '.$orders->name_receivers.'</p>
+                <br> <p>Địa Chỉ: '.$orders->name_receivers.'</p>
+                <br> <p> Số Điện Thoại: '.$orders->phone_receivers.'</p>
+                <br> <p>Cân Nặng: '.$order_detail->weight.'</p>
+                <br> <p>Hàng Hóa: '.$order_detail->description.'</p>
                 <br>
               </div>
               <div class="page-break"></div>
