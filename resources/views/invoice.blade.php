@@ -10,15 +10,15 @@
     <colgroup width="94"></colgroup>
     <colgroup span="2" width="94"></colgroup>
     <tr>
-      <td colSpan=2 rowspan=8 height="199" align="center" valign=middle>
+      <td colSpan=2 rowSpan=8 align="center" valign=middle>
         <font size=-2 color="#000000">
-          <img src="{{($infors->logo)}}" width=282 height=175 hspace=1 vspace=15>
+          <img src="{{($infors->logo)}}" width=250 height=200 hspace=8 vspace=8>
         </font>
       </td>
     </tr>
     <tr>
       <td></td>
-      <td colSpan=3 rowspan=2 align="left" valign=middle class="largeText"><b>INVOICE #No. {{$orders->order_id}}</b></td>
+      <td colSpan=3 rowSpan=2 align="left" valign=middle class="largeText"><b>INVOICE #No. {{$orders->order_id}}</b></td>
     </tr>
     <tr></tr>
     <tr>
