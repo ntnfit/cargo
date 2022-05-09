@@ -34,8 +34,6 @@ class ReceiverController extends Controller
      */
     public function store(Request $request)
     {
-        
-       
         $this->validate($request, [
             'customer_id' => 'required',
             'name' => 'required',
@@ -43,14 +41,17 @@ class ReceiverController extends Controller
             'address' => 'required',
         ]);
         
-        $Receiver = new Receiver;
+        $receiver = new Receiver;
  
-        $Receiver->customer_id = $request->customer_id;
-        $Receiver->name = $request->name;
-        $Receiver->phone = $request->phone;
-        $Receiver->address = $request->address;
-        $Receiver->save();
-       return response()->json(['success' => true]);
+        $receiver->customer_id = $request->customer_id;
+        $receiver->name = $request->name;
+        $receiver->phone = $request->phone;
+        $receiver->address = $request->address;
+        $receiver->save();
+        return response()->json([
+          'data' => $receiver,
+          'success' => true
+        ]);
     }
 
     /**

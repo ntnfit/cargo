@@ -51,8 +51,8 @@ Route::group(['middleware' => 'auth'], function () {
 	// thông tin cargo
 	Route::resource('infor', InfoController::class);
 	//thông tin customer & receiver
-	Route::resource('customers',CustomerController::class);
-	Route::resource('receivers',ReceiverController::class);
+	Route::resource('customers', CustomerController::class);
+	Route::resource('receivers', ReceiverController::class);
 	Route::get('invoice/{id}',[InvoiceController::class,'print']);
 	Route::get('orders/{id}',[InvoiceController::class,'print']);
 	Route::get('labels',[LabelController::class,'label']);

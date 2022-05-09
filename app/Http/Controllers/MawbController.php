@@ -40,64 +40,63 @@ class MawbController extends Controller
      */
     public function store(Request $request)
     {
-        
-        'route',
-        'master',
-        'destination',
-        'value',
-        'note',
-        'shipdate',
-        'no',
-        'airline',
-        'flight_no',
-        'flight_departure_date',
-        'flight_from_city',
-        'connect_flight_no',
-        'connect_flight_departure_date',
-        'connect_light_departure_from',
-        'airport',
-        'destination_city',
-        'destination_country'
-        $this->validate($request, [
-            'weight' => 'required',
-            'receiver' => 'required',
-            'sender' => 'required',
-            'package' => 'required',
-            'deldate' => 'required',
-            'order'=>'required'
+        // 'route',
+        // 'master',
+        // 'destination',
+        // 'value',
+        // 'note',
+        // 'shipdate',
+        // 'no',
+        // 'airline',
+        // 'flight_no',
+        // 'flight_departure_date',
+        // 'flight_from_city',
+        // 'connect_flight_no',
+        // 'connect_flight_departure_date',
+        // 'connect_light_departure_from',
+        // 'airport',
+        // 'destination_city',
+        // 'destination_country',
+        // $this->validate($request, [
+        //     'weight' => 'required',
+        //     'receiver' => 'required',
+        //     'sender' => 'required',
+        //     'package' => 'required',
+        //     'deldate' => 'required',
+        //     'order'=>'required'
            
-        ]);
+        // ]);
     
-        // 
-        $prefix="A-";
-            $subid= order::latest('id')->first();
-            if(!$subid)
-            {   
-                $subid=1;
-                $code=$prefix.str_pad( $subid,5,'0',STR_PAD_LEFT);
-            }
-            else
-            {
-                $subid=$subid->id+1;
-                $code=$prefix.str_pad( $subid,5,'0',STR_PAD_LEFT);
-            }
+        // // 
+        // $prefix="A-";
+        //     $subid= order::latest('id')->first();
+        //     if(!$subid)
+        //     {   
+        //         $subid=1;
+        //         $code=$prefix.str_pad( $subid,5,'0',STR_PAD_LEFT);
+        //     }
+        //     else
+        //     {
+        //         $subid=$subid->id+1;
+        //         $code=$prefix.str_pad( $subid,5,'0',STR_PAD_LEFT);
+        //     }
           
-        //data processing
-        $data=[];
-        $data['order_id']=$code;
-        $data['shipdate']=$request->shipdate;
-        $data['deldate']=$request->deldate;
-        $data['sender'] =$request->sender;
-        $data['receiver']=$request->receiver;
-        $data['remark']=$request->remark;
-        $data['value_order']=$request->value_order;
-        $data['weight']=$request->weight;
-        $data['tax']=$request->tax;
-        $data['discount']=$request->discount;
-        $data['total']=$request->value_order+$request->tax - $request->discount;
-        $order = order::create( $data);
-        return redirect()->route('orders.index')
-        ->with('success','Product created successfully.');
+        // //data processing
+        // $data=[];
+        // $data['order_id']=$code;
+        // $data['shipdate']=$request->shipdate;
+        // $data['deldate']=$request->deldate;
+        // $data['sender'] =$request->sender;
+        // $data['receiver']=$request->receiver;
+        // $data['remark']=$request->remark;
+        // $data['value_order']=$request->value_order;
+        // $data['weight']=$request->weight;
+        // $data['tax']=$request->tax;
+        // $data['discount']=$request->discount;
+        // $data['total']=$request->value_order+$request->tax - $request->discount;
+        // $order = order::create( $data);
+        // return redirect()->route('orders.index')
+        // ->with('success','Product created successfully.');
     }
 
     /**

@@ -19,7 +19,7 @@ class CustomerController extends Controller
       
         foreach($customers as $customer)
         {
-            $option .='<option value="'.$customer->id.'">'.$customer->name.'-'.$customer->phone.'</option>';
+          $option .='<option value="'.$customer->id.'">'.$customer->name.'-'.$customer->phone.'</option>';
         }
         return $option;
     }
@@ -42,14 +42,17 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'phone' => 'required|unique:customers,phone',
-            'address' => 'required',
-        ]);
-        $input = $request->all();
-        $customers = Customer::create($input);
-        return response()->json(['success' => true]);
+      $this->validate($request, [
+          'name' => 'required',
+          'phone' => 'required|unique:customers,phone',
+          'address' => 'required',
+      ]);
+      $input = $request->all();
+      $customer = Customer::create($input);
+      return response()->json([
+        'data' => $customer,
+        'success' => true
+      ]);
     }
 
     /**
