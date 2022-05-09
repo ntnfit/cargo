@@ -322,7 +322,7 @@
           if(sender!="")
           {
             $("#add_receiver").removeClass('btn btn-sm btn-primary disabled').addClass('btn btn-sm btn-primary');
-            $.get('/cargoadmin/public/receivers/'+a,function(data){
+            $.get('/receivers/'+a,function(data){
              $("#receiver").html(data);
            })
           }
@@ -332,7 +332,7 @@
         $("#sender").on('select2:clear', function (e) {
           var a=$("#sender").val();
           $("#add_receiver").removeClass('btn btn-sm btn-primary').addClass('btn btn-sm btn-primary disabled');
-          $.get('/cargoadmin/public/receivers/'+a,function(data){
+          $.get('/receivers/'+a,function(data){
              $("#receiver").html(data);
            })
         });
@@ -439,7 +439,7 @@
          
           $("#btn-save-receiver").html('Please Wait...');
           $("#btn-save-receiver"). attr("disabled", true);
-         
+        
         // ajax
         $.ajax({
             type:"POST",
@@ -450,6 +450,7 @@
               phone:phone,
               address:address,
             },
+            
             dataType: 'json',
             success: function(res){
             $("#add-receiver").trigger("reset");
@@ -460,7 +461,7 @@
             $("#add-receiver").trigger("reset");
             $("#btn-save-receiver").html('Submit');
             $("#btn-save-receiver"). attr("disabled", false);
-            console.log(data)
+            console.log(res)
            }
         });
     });

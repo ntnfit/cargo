@@ -10,6 +10,8 @@ use App\Http\Controllers\ReceiverController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LabelController;
 use App\Http\Controllers\MawbController;
+use App\Models\Role;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,8 +59,10 @@ Route::group(['middleware' => 'auth'], function () {
 	//shipment
 	Route::resource('mawb',MawbController::class);
 });
-
-
+Route::post('receiver',[ReceiverController::class,'store'])->name('postre');
+Route::get('tests', function () {
+    return view('test');
+})->name('test');
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
 	\UniSharp\LaravelFilemanager\Lfm::routes();
 	});

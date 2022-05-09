@@ -34,15 +34,23 @@ class ReceiverController extends Controller
      */
     public function store(Request $request)
     {
+        
+       
         $this->validate($request, [
             'customer_id' => 'required',
             'name' => 'required',
             'phone' => 'required|unique:receivers,phone',
             'address' => 'required',
         ]);
-        $input = $request->all();
-        $Receivers = Receiver::create($input);
-        return response()->json(['success' => true]);
+        
+        $Receiver = new Receiver;
+ 
+        $Receiver->customer_id = $request->customer_id;
+        $Receiver->name = $request->name;
+        $Receiver->phone = $request->phone;
+        $Receiver->address = $request->address;
+        $Receiver->save();
+       return response()->json(['success' => true]);
     }
 
     /**

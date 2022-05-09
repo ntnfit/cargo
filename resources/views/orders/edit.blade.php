@@ -313,7 +313,7 @@ padding:15px;
           {
            
             $("#add_receiver").removeClass('btn btn-sm btn-primary disabled').addClass('btn btn-sm btn-primary');
-            $.get('/cargoadmin/public/receivers/'+a,function(data){
+            $.get('/receivers/'+a,function(data){
              $("#receiver").html(data);
            })
           }
@@ -323,7 +323,7 @@ padding:15px;
         $("#single").on('select2:clear', function (e) {
           var a=$("#single").val();
           $("#add_receiver").removeClass('btn btn-sm btn-primary').addClass('btn btn-sm btn-primary disabled');
-          $.get('/cargoadmin/public/receivers/'+a,function(data){
+          $.get('/receivers/'+a,function(data){
              $("#receiver").html(data);
            })
         });

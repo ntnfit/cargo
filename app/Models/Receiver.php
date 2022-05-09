@@ -16,6 +16,6 @@ class Receiver extends Model
         'customer_id',
         'name',
         'phone',
-        'address',
+        'address'
     ];
 }
