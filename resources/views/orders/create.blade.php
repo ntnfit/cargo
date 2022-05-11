@@ -269,13 +269,13 @@
 
   function totalweight() {
     total = 0;
-    var els = document.getElementsByClassName("form-control weight"); var a=0;
-      for(var i = 0; i < els.length; i++)
-      {
-      a +=parseFloat(els[i].value);
-      } 
-      $('#total-weight').val(a);
-      $('#hidden-weight').val(a) 
+    var els = document.getElementsByClassName("form-control weight");
+    var a = 0;
+    for(var i = 0; i < els.length; i++) {
+      a += parseFloat(els[i].value);
+    } 
+    $('#total-weight').val(a);
+    $('#hidden-weight').val(a) 
   } //getResults function
 </script>
 <script>
