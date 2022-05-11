@@ -36,9 +36,12 @@
           @if($order->service =='HCM')
             <input type="checkbox" class="radio" value="HCM" name="service[1][]" checked />HCM</label>
             <input type="checkbox" class="radio" value="TL" name="service[1][]" />TỈNH</label>
-          @else
+          @elseif($order->service =='TL')
             <input type="checkbox" class="radio" value="HCM" name="service[1][]"  />HCM</label>
             <input type="checkbox" class="radio" value="TL" name="service[1][]" checked />TỈNH</label>
+          @else
+          <input type="checkbox" class="radio" value="HCM" name="service[1][]"  />HCM</label>
+          <input type="checkbox" class="radio" value="TL" name="service[1][]"  />TỈNH</label>
           @endif  
         </div>
         <label for="remark">Remark</label>

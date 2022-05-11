@@ -97,7 +97,14 @@ class OrderController extends Controller
         $data['tax']=$request->tax;
         $data['discount']=$request->discount;
         $data['total']=$request->value_order+$request->tax - $request->discount;
-        $data['service']=$request->service['1']['0'];
+        if(empty($request->service['1']['0']))
+        {
+            $data['service']=NULL;
+        }
+        else{
+            $data['service']=$request->service['1']['0'];
+        }
+      
         $order = order::create( $data);
         $orderID = $order->id;
             
@@ -174,7 +181,13 @@ class OrderController extends Controller
         $data['tax']=$request->tax;
         $data['discount']=$request->discount;
         $data['total']=$request->value_order+$request->tax - $request->discount;
-        $data['service']=$request->service['1']['0'];
+        if(empty($request->service['1']['0']))
+        {
+            $data['service']=NULL;
+        }
+        else{
+            $data['service']=$request->service['1']['0'];
+        }
         //update order
         
         $order = order::find($id);
