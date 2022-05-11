@@ -25,7 +25,7 @@
         <select id="sender" class="form-control" name="sender">
           <option value="{{$order->sender}}">{{$order->name_sender}}</option>
         </select>
-        {{print_r($order)}}
+       
         <label>Receiver</label>
         <a id="add_receiver" class="btn btn-sm btn-primary disabled" href="#">Add</a> 
         <select id="receiver" class="form-control" name="receiver">
