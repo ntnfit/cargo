@@ -68,7 +68,7 @@
             @endphp
             @foreach($order_detail as $detail)
               <tr id="rec-{{ ++$count}}">
-                <td><span class="sn"></span>.</td>
+                <td><span class="sn">{{$count}}</span> </td>
                 <td class="it"><input type="text" class="form-control"  value="{{$detail->description}}" name="order[{{$count}}][item]"></td>
                 <td class="wg"><input type="number" step="0.01"  value="{{$detail->weight}}" onchange="totalweight()" class="form-control weight" name="order[{{$count}}][weight]"></td>
                 <td><a class="btn btn-xs delete-record" data-id="{{$count}}"><i class="glyphicon glyphicon-trash" >x</i></a></td>

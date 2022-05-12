@@ -28,9 +28,10 @@ class LabelController extends Controller
                 )
                 ->where('orders.id',(int)substr($id,2,7))->first();
                 $order_detail=orderdetail::where('order_id',(int)substr($id,2,7))->where('line',(int)substr($id,8))->first();
+                $num=orderdetail::where('order_id',(int)substr($id,2,7))->count();
                 $label .='
                 <div class="label">
-                <br>'.++$key.' Box(es)
+                <br>'.$num.' Box(es)
                 <br> <b style="font-size:60px">'.$orders->order_id.'-'. $order_detail->line.'</b> 
                 <br> <p> Người Nhận </p>
                 <br> <p>Tên: '.$orders->name_receivers.'</p>
