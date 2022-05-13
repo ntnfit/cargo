@@ -35,7 +35,7 @@ class LabelController extends Controller
                 <br> <b style="font-size:60px">'.$orders->order_id.'-'. $order_detail->line.'</b> 
                 <br> <p> Người Nhận </p>
                 <br> <p>Tên: '.$orders->name_receivers.'</p>
-                <br> <p>Địa Chỉ: '.$orders->name_receivers.'</p>
+                <br> <p>Địa Chỉ: '.$orders->address_receivers.'</p>
                 <br> <p> Số Điện Thoại: '.$orders->phone_receivers.'</p>
                 <br> <p>Cân Nặng: '.$order_detail->weight.'</p>
                 <br> <p>Hàng Hóa: '.$order_detail->description.'</p>
