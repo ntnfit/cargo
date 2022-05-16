@@ -37,7 +37,7 @@ class OrderController extends Controller
             }
         }],
         ['orders_detail.status','=',0]
-        ])
+        ])->orderBy('oders_detail.line','DESC')
     ->paginate(10);
         return view('orders.index',compact('orders'))
             ->with('i', (request()->input('page', 1) - 1) * 10);
