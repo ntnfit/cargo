@@ -23,6 +23,12 @@ class CustomerController extends Controller
         }
         return $option;
     }
+    public function get_all ()
+    { 
+      $customer= Customer::paginate(10);
+        return view('customer_recever.list_customer',compact('customer'))
+            ->with('i', (request()->input('page', 1) - 1) * 10);
+    }
 
     /**
      * Show the form for creating a new resource.

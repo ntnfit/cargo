@@ -53,11 +53,14 @@ Route::group(['middleware' => 'auth'], function () {
 	//thông tin customer & receiver
 	Route::resource('customers', CustomerController::class);
 	Route::resource('receivers', ReceiverController::class);
-	Route::get('invoice/{id}',[InvoiceController::class,'print']);
 	Route::get('orders/{id}',[InvoiceController::class,'print']);
+	route::get('list_customer',[CustomerController::class,'get_all']);
+	//Invoice and label.
+	Route::get('invoice/{id}',[InvoiceController::class,'print']);
 	Route::get('labels',[LabelController::class,'label']);
 	//shipment
 	Route::resource('mawb',MawbController::class);
+	
 });
 Route::post('receiver',[ReceiverController::class,'store'])->name('postre');
 Route::get('tests', function () {

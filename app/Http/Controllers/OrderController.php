@@ -38,7 +38,7 @@ class OrderController extends Controller
                             }
                         }],
                         ['orders_detail.status', '=', 0]
-                      ])
+                      ])->orderby('orders_detail.line','ASC')
                       ->paginate($row_per_page);
         return view('orders.index',compact('orders'))
             ->with('start_no', (request()->input('page', 1) - 1) * $row_per_page + 1);
