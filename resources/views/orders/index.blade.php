@@ -67,15 +67,12 @@
             <th>Created at</th>
             <th>Action</th>
         </tr>
-        @php
-        $count=1
-        @endphp
         @foreach ($orders as $order)
             <tr>
                 <td>
                   <input class="checkbox grid-row-checkbox" type="checkbox" data-id="{{ $order->order_id.'-'.$order->line }}">
                 </td>
-                <td>{{$count++}}</td>
+                <td>{{$start_no++}}</td>
                 <td>{{$order->order_id.' - '.$order->line}}</td>
                 <td>{{$order->shipdate}}</td>
                 <td>{{$order->name_sender}}</td>
