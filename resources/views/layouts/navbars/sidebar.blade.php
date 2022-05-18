@@ -87,7 +87,27 @@
                         </ul>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
+                        <i class="ni ni-circle-08" style="color: #f4645f;"></i>
+                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Khách hàng') }}</span>
+                    </a>
 
+                    <div class="collapse show" id="navbar-examples">
+                        <ul class="nav nav-sm flex-column">
+                           
+                           
+                            <li class="nav-item">
+                                
+                                <a class="nav-link" href="{{ route('listcustomer') }}">
+                                    {{ __('người gửi') }}
+                                </a>
+                                <a class="nav-link" href="{{ route('listreceiver') }}">người nhận</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="{{ route('icons') }}">
                         <i class="ni ni-planet text-blue"></i> {{ __('Icons') }}

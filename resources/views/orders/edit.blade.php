@@ -14,25 +14,25 @@
   <div class="row">
     {!! Form::model($order, ['method' => 'PATCH','route' => ['orders.update', $order->id]]) !!}
       @csrf
-      <div class="col"><span>Column</span>
-        <label for="ShipDate">Shipping Date</label>
+      <div class="col"><span></span>
+        <label for="ShipDate">Ngày gửi hàng</label>
         <input id="ShipDate" class="form-control" name="shipdate" type="date" value="{{$order->shipdate}}"/>
 
-        <label for="DelDate">Delivery date</label>
+        <label for="DelDate">Ngày giao hàng</label>
         <input id="DelDate" class="form-control" type="date" name="deldate" value="{{$order->deldate}}"/>
-        <label for="sender">Sender</label>
-        <a class="btn btn-sm btn-primary " href="#" id="OpenForm">Add</a> 
+        <label for="sender">Người gửi</label>
+        <a class="btn btn-sm btn-primary " href="#" id="OpenForm">thêm mới</a> 
         <select id="sender" class="form-control" name="sender">
           <option value="{{$order->sender}}">{{$order->name_sender}}</option>
         </select>
        
-        <label>Receiver</label>
-        <a id="add_receiver" class="btn btn-sm btn-primary disabled" href="#">Add</a> 
+        <label>Người nhận</label>
+        <a id="add_receiver" class="btn btn-sm btn-primary disabled" href="#">thêm mới</a> 
         <select id="receiver" class="form-control" name="receiver">
           <option value="{{$order->receiver}}">{{$order->name_receivers}}</option>
         </select> 
         <div class="col2 text-left">
-          <label for="service">Service</label>
+          <label for="service">Dịch Vụ</label>
           @if($order->service =='HCM')
             <input type="checkbox" class="radio" value="HCM" name="service[1][]" checked />HCM</label>
             <input type="checkbox" class="radio" value="TL" name="service[1][]" />TỈNH</label>
@@ -44,21 +44,21 @@
           <input type="checkbox" class="radio" value="TL" name="service[1][]"  />TỈNH</label>
           @endif  
         </div>
-        <label for="remark">Remark</label>
+        <label for="remark">Ghi chú</label>
         <textarea  class="form-control"  name="remark"> </textarea>
-        <label>Order value</label>
+        <label>Giá trị đơn hàng</label>
         <input  class="form-control" type="number" step="0.01" value="{{$order->value_order}}"name="value_order" require/>
-        <label for="tax">Tax</label>
+        <label for="tax">Thuế</label>
         <input  class="form-control" type="number" step="any" value="{{$order->tax}}" name="tax"/> 
-        <label for="discount">discount</label>
+        <label for="discount">Giảm giá</label>
         <input  class="form-control" type="number" step="any" value="{{$order->discount}}" name="discount" /> 
         <input class="form-control" id="hidden-weight" type="number" name="weight" value="{{$order->weight}}" step="any" hidden>
         <table class="table table-bordered" id="tbl_posts">
           <thead>
             <tr>
               <th>#</th>
-              <th>Description</th>
-              <th>Weight of Vacancies</th>
+              <th>Mô tả</th>
+              <th>Cân Nặng</th>
               <th>Action</th>
             </tr>   
           </thead>
@@ -86,10 +86,10 @@
       </div>
         
       <div class="well clearfix">
-        <a class="btn btn-primary pull-right add-record" data-added="0"><i class="glyphicon glyphicon-plus"></i> Add Row</a>
+        <a class="btn btn-primary pull-right add-record" data-added="0"><i class="glyphicon glyphicon-plus"></i> Thêm dòng</a>
       </div>
       <div class="col-12 text-center">
-        <button class=" btn btn-success "  type="submit">Save</button>
+        <button class=" btn btn-success "  type="submit">Lưu</button>
       </div>
     </form>
 
@@ -112,24 +112,24 @@
   <div class="receiver_form_area">
     <button type="button" class="btn-close btn btn-danger"  aria-label="Close" id="close-r"></button>
     <div class="form_area_inner">
-      <h3>Add receiver</h3>
+      <h3>Thêm người nhận</h3>
       <form action="javascript:void(0)" method="POST" id="add-receiver">
         @csrf
         <div class="form-group">
-          <label>Name</label>
+          <label>Tên</label>
           <input type="text" id="name-receiver" name="name" class="custom-inp" />
         </div>
         <div class="form-group">
-          <label>Mobile</label>
+          <label>Số điện thoại</label>
           <input type="text" id="phone-receiver" name="phone" class="custom-inp" />
         </div>
         <div class="form-group">
-          <label><Address></Address></label>
+          <label>Địa chỉ</label>
           <textarea id="address-receiver" class="custom-inp-txt" name="address" required></textarea>
         </div>
         <div>
           <button type="submit" class="btn btn-success" id="btn-save-receiver" value="addreceiver">
-            Save
+            Lưu
           </button>
         </div>
       </form>
@@ -142,26 +142,26 @@
   <div class="sender_form_area">
   <button type="button" class="btn-close btn btn-danger"  aria-label="Close" id="close-s"></button>
     <div class="form_area_inner">
-      <h3>Add sender</h3>
+      <h3>Thêm người gửi</h3>
       <form action="javascript:void(0)" method="POST" id="add-sender">
         @csrf
         <div class="form-group">
-          <label>Name</label>
+          <label>Tên</label>
           <input type="text" id="name-sender" name="name" class="custom-inp" required/>
         </div>
        
         <div class="form-group">
-          <label>Mobile</label>
+          <label>số điện thoại</label>
           <input type="text" id="phone-sender"  name="phone" class="custom-inp" required />
         </div>
         <div class="form-group">
-          <label>Address</label>
+          <label>địa chỉ</label>
           <textarea id="address-sender" name="address"class="custom-inp-txt" required></textarea>
         </div>
        
         <div class="">
           <button type="submit" class="btn btn-success" id="btn-save-sender" value="addsender">
-            Save
+            Lưu
           </button>
         </div>
       </form>

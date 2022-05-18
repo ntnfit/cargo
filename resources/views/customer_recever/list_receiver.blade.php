@@ -20,7 +20,7 @@
                                 </button>
                             </span>
                         </a>
-                        <input type="text" class="form-control mr-3" name="term" placeholder="tìm kiếm theo SĐT" id="term">
+                        <input type="text" class="form-control mr-3" name="term" placeholder="Search Order" id="term">
                         <span class="input-group-btn mr-4  mt-1">
                             <button class="btn btn-info" type="submit" title="Search Order">
                                 <span class="fas fa-search"></span>
@@ -61,18 +61,18 @@
         @php
         $count=1
         @endphp
-        @foreach ($customer as $customer)
+        @foreach ($receiver as $receiver)
             <tr>
                
                 <td>{{$count++}}</td>
-                <td>{{$customer->name}}</td>
-                <td>{{$customer->phone}}</td>
-                <td>{{$customer->address}}</td>
-                <td>{{$customer->created_at}}</td>
+                <td>{{$receiver->name}}</td>
+                <td>{{$receiver->phone}}</td>
+                <td>{{$receiver->address}}</td>
+                <td>{{$receiver->created_at}}</td>
                 <td>
                
-                    <form action="/customers/{{$customer->id}}/edit" method="POST">
-                        <a href="./customers/{{$customer->id}}/edit">
+                    <form action="/receivers/{{$receiver->id}}/edit" method="POST">
+                        <a href="./receivers/{{$receiver->id}}/edit">
                             <i class="fas fa-edit  fa-lg"></i>
                         </a>
                     </form>

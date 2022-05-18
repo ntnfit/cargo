@@ -15,6 +15,25 @@ class ReceiverController extends Controller
     {
         
     }
+    public function get_all (Request $request)
+    { 
+        $search =  $request->input('term');
+        if($search!=""){
+            $receiver = Receiver::where(function ($query) use ($search){
+                $query->where('phone', 'like', '%'.$search.'%')
+                    ->orWhere('name', 'like', '%'.$search.'%');
+            })
+            ->paginate(25);
+            $receiver->appends(['term' => $search]);
+        }
+        else
+        {
+            $receiver= Receiver::paginate(25);
+        }
+    
+        return view('customer_recever.list_receiver',compact('receiver'))
+            ->with('i', (request()->input('page', 1) - 1) * 25);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -79,7 +98,8 @@ class ReceiverController extends Controller
      */
     public function edit($id)
     {
-        //
+        $receivers = receiver::findOrFail($id);
+        return view('customer_recever.edit_receiver', compact('receivers'));
     }
 
     /**
@@ -89,9 +109,13 @@ class ReceiverController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        //
+        $receiver = receiver::findOrFail($id);
+        $receiver->update($request->all());
+       
+        return redirect()->route('listreceiver')
+            ->with('success', 'updated successfully');
     }
 
     /**

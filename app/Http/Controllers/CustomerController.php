@@ -23,11 +23,26 @@ class CustomerController extends Controller
         }
         return $option;
     }
-    public function get_all ()
+    public function get_all (Request $request)
     { 
-      $customer= Customer::paginate(10);
+        $search =  $request->input('term');
+        if($search!=""){
+            $customer = Customer::where(function ($query) use ($search){
+                $query->where('phone', 'like', '%'.$search.'%')
+                    ->orWhere('name', 'like', '%'.$search.'%');
+            })
+            ->paginate(25);
+            $customer->appends(['term' => $search]);
+        }
+
+        else
+        {
+            $customer= Customer::paginate(25);
+
+        }
         return view('customer_recever.list_customer',compact('customer'))
-            ->with('i', (request()->input('page', 1) - 1) * 10);
+        ->with('i', (request()->input('page', 1) - 1) * 25);
+        
     }
 
     /**
@@ -80,7 +95,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customers = customer::findOrFail($id);
+        return view('customer_recever.edit_customer', compact('customers'));
     }
 
     /**
@@ -92,7 +108,12 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $customers = Customer::find($id);
+       
+        $customers->update($request->all());
+       
+        return redirect()->route('listcustomer')
+            ->with('success', 'updated successfully');
     }
 
     /**

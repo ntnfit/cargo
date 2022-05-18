@@ -26,20 +26,20 @@
     {!! Form::open(array('route' => 'orders.store','method'=>'POST')) !!}
       @csrf
       <div class="col">
-        <label for="ShipDate">Shipping Date</label>
+        <label for="ShipDate">Ngày gửi hàng</label>
         <input id="ShipDate" class="form-control" name="shipdate" type="date" value="{{date('Y-m-d')}}" require/>
-        <label for="DelDate">Delivery date</label>
+        <label for="DelDate">Ngày giao hàng</label>
         <input id="DelDate" class="form-control" type="date" name="deldate" value="{{old('deldate')}}" require />
         <div class="col2 text-left">
-          <label for="reciver">Sender</label>
-          <a class="btn btn-sm btn-primary m-1" href="#" id="OpenForm">Add</a> 
+          <label for="reciver">Người gửi</label>
+          <a class="btn btn-sm btn-primary m-1" href="#" id="OpenForm">Thêm</a> 
         </div> 
         <select id="sender" class="form-control" name="sender">
           <option></option>
         </select>
         <div class="col2 text-left">
-          <label for="reciver">Receiver</label>
-          <a id="add_receiver" class="btn btn-sm btn-primary m-1 disabled" href="#">Add</a> 
+          <label for="reciver">Người nhận</label>
+          <a id="add_receiver" class="btn btn-sm btn-primary m-1 disabled" href="#">Thêm</a> 
         </div> 
         <select id="receiver" class="form-control" name="receiver">
           <option></option>
@@ -50,17 +50,17 @@
           <input type="checkbox" class="radio m-1" value="TL" name="service[1][]" />TỈNH</label>
         </div>
         <div class="col2 text-left">
-          <label for="remark">Remark</label>
+          <label for="remark">Ghi Chú</label>
         </div> 
         <textarea  class="form-control"  name="remark"> </textarea>
-        <label>Order value</label>
+        <label>Giá trị đơn hàng</label>
         <input  class="form-control" type="number" step="0.01" value="0.00"name="value_order" require/>
         <div class="col2 text-left">
             <label>Tax</label>
         </div>
         <input  class="form-control" type="number" step="0.01" value="0.00"name="tax"/> 
         <div class="col2 text-left">
-          <label>Discount</label>
+          <label>Giảm giá</label>
         </div>
         <input  class="form-control" type="number" step="0.01"value="0.00" name="discount"/> 
         <input class="form-control" id="hidden-weight" type="number" name="weight" value="0.00" step="any" hidden>
@@ -68,8 +68,8 @@
           <thead>
             <tr>
               <th>#Package</th>
-              <th>Description</th>
-              <th>Weight of Vacancies</th>
+              <th>Mô tả</th>
+              <th>Cân nặng</th>
               <th>Action</th>
             </tr>   
           </thead>
@@ -84,11 +84,11 @@
           </tr>
         </table>
         <div class="col2 text-left">
-          <a class="btn btn-primary pull-right add-record" data-added="0"><i class="glyphicon glyphicon-plus"></i> Add Row</a>
+          <a class="btn btn-primary pull-right add-record" data-added="0"><i class="glyphicon glyphicon-plus"></i>Thêm dòng</a>
         </div>
       </div>
       <div class="col-12 text-center">
-        <button class=" btn btn-success "  type="submit">Save</button>
+        <button class=" btn btn-success "  type="submit">Lưu</button>
       </div>
     </form>
 
@@ -110,7 +110,7 @@
   <div class="receiver_form_area">
   <button type="button" class="btn-close btn btn-danger"  aria-label="Close" id="close-r"></button>
     <div class="form_area_inner">
-      <h3>Add receiver</h3>
+      <h3>Thêm người nhận</h3>
       <form action="javascript:void(0)" method="POST" id="add-receiver">
         @csrf
         <div class="form-group">
@@ -118,15 +118,15 @@
           <input type="text" id="name-receiver" name="name" class="custom-inp" />
         </div>
         <div class="form-group">
-          <label>Mobile</label>
+          <label>Số điện thoại</label>
           <input type="text" id="phone-receiver" name="phone" class="custom-inp" />
         </div>
         <div class="form-group">
-          <label><Address></Address></label>
+          <label>Địa chỉ</label>
           <textarea id="address-receiver" class="custom-inp-txt" name="address" required></textarea>
         </div>
         <div class="">
-          <button type="submit" class="btn btn-success" id="btn-save-receiver" value="addreceiver">Save</button>
+          <button type="submit" class="btn btn-success" id="btn-save-receiver" value="addreceiver">Lưu</button>
         </div>
       </form>
     </div>
@@ -137,23 +137,23 @@
   <div class="sender_form_area">
     <button type="button" class="btn-close btn btn-danger"  aria-label="Close" id="close-s"></button>
     <div class="form_area_inner">
-      <h3>Add sender</h3>
+      <h3>Thêm người gửi</h3>
       <form action="javascript:void(0)" method="POST" id="add-sender">
         @csrf
         <div class="form-group">
-          <label>Name</label>
+          <label>Tên</label>
           <input type="text" id="name-sender" name="name" class="custom-inp" required/>
         </div>
         <div class="form-group">
-          <label>Mobile</label>
+          <label>Số điện thoại</label>
           <input type="text" id="phone-sender"  name="phone" class="custom-inp" required />
         </div>
         <div class="form-group">
-          <label>Address</label>
+          <label>địa chỉ</label>
           <textarea id="address-sender" name="address"class="custom-inp-txt" required></textarea>
         </div>
         <div class="">
-          <button type="submit" class="btn btn-success" id="btn-save-sender" value="addsender">Save</button>
+          <button type="submit" class="btn btn-success" id="btn-save-sender" value="addsender">Lưu</button>
         </div>
       </form>
     </div>

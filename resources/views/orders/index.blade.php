@@ -49,22 +49,22 @@
     </div>
     @endif
     <div class="col-4 text-right">
-                            <a class="btn btn-sm btn-primary" href="{{ route('orders.create') }}">Add Order</a>
+                            <a class="btn btn-sm btn-primary" href="{{ route('orders.create') }}">Tạo đơn hàng</a>
                             <button id="process" class="btn btn-sm btn-warning" disabled="true"> Process MAWB </button>
-                            <button id="label" class="btn btn-sm btn-primary" disabled="true"> Print label </button>
+                            <button id="label" class="btn btn-sm btn-primary" disabled="true"> In label </button>
                          
     </div>
     <table class="table table-bordered table-responsive-lg" style="margin-left: 15px;">
         <tr>
             <th> <input id="select-all" type="checkbox" class="checkbox" onclick="toggle(this);"></th>
             <th>No</th>
-            <th>Order ID</th>
-            <th>Ship Date</th>
-            <th>Sender</th>
-            <th>Receiver</th>
-            <th>Weight</th>
-            <th>Amount</th>
-            <th>Created at</th>
+            <th>Mã đơn hàng</th>
+            <th>Ngày gửi hàng</th>
+            <th>Người gửi</th>
+            <th>Người nhận</th>
+            <th>Cận nặng</th>
+            <th>Giá trị</th>
+            <th>Ngày tạo</th>
             <th>Action</th>
         </tr>
         @foreach ($orders as $order)

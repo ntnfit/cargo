@@ -54,7 +54,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('customers', CustomerController::class);
 	Route::resource('receivers', ReceiverController::class);
 	Route::get('orders/{id}',[InvoiceController::class,'print']);
-	route::get('list_customer',[CustomerController::class,'get_all']);
+	route::get('list_customer',[CustomerController::class,'get_all'])->name('listcustomer');
+	route::get('list_receiver',[ReceiverController::class,'get_all'])->name('listreceiver');
 	//Invoice and label.
 	Route::get('invoice/{id}',[InvoiceController::class,'print']);
 	Route::get('labels',[LabelController::class,'label']);

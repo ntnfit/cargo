@@ -25,21 +25,30 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $row_per_page = 25;
-        $orders=order::join('orders_detail', 'orders.id', '=', 'orders_detail.order_id')
-                      ->join('customers', 'orders.sender', '=', 'customers.id')
-                      ->join('receivers', 'orders.receiver', '=', 'receivers.id')
-                      ->select( 'orders.*','orders_detail.line','customers.name as name_sender','receivers.name as name_receivers' )
-                      ->latest('orders.created_at')
-                      ->where([
-                        ['orders.order_id', '!=', null],
-                        [function ($query) use ($request) {
-                            if(($term=$request->term)){
-                                $query->orwhere('orders.order_id','LIKE','%'.$term.'%')->get();
-                            }
-                        }],
-                        ['orders_detail.status', '=', 0]
-                      ])->orderby('orders_detail.line','ASC')
-                      ->paginate($row_per_page);
+        $search =  $request->input('term');
+        if($search!=""){
+            $orders = order::join('orders_detail', 'orders.id', '=', 'orders_detail.order_id')
+            ->join('customers', 'orders.sender', '=', 'customers.id')
+            ->join('receivers', 'orders.receiver', '=', 'receivers.id')
+            ->select( 'orders.*','orders_detail.line','customers.name as name_sender','receivers.name as name_receivers' )
+            ->latest('orders.created_at')->where(function ($query) use ($search){
+                $query->where('orders.order_id', 'like', '%'.$search.'%');
+                  
+            }) ->orderby('orders_detail.line','ASC')
+            ->paginate($row_per_page);
+            $orders->appends(['term' => $search]);
+        }
+        else
+        {
+            $orders =  order::join('orders_detail', 'orders.id', '=', 'orders_detail.order_id')
+            ->join('customers', 'orders.sender', '=', 'customers.id')
+            ->join('receivers', 'orders.receiver', '=', 'receivers.id')
+            ->select( 'orders.*','orders_detail.line','customers.name as name_sender','receivers.name as name_receivers' )
+            ->latest('orders.created_at')
+            ->orderby('orders_detail.line','ASC')
+            ->paginate($row_per_page);
+        }
+                     
         return view('orders.index',compact('orders'))
             ->with('start_no', (request()->input('page', 1) - 1) * $row_per_page + 1);
     }
