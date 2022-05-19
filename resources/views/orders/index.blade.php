@@ -77,7 +77,7 @@
                 <td>{{$order->shipdate}}</td>
                 <td>{{$order->name_sender}}</td>
                 <td>{{$order->name_receivers}}</td>
-                <td>{{$order->weight}}</td>
+                <td>{{$order->cn}}</td>
                 <td>{{$order->total}}</td>
                 <td>{{$order->created_at}}</td>
                 <td>

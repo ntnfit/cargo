@@ -30,7 +30,7 @@ class OrderController extends Controller
             $orders = order::join('orders_detail', 'orders.id', '=', 'orders_detail.order_id')
             ->join('customers', 'orders.sender', '=', 'customers.id')
             ->join('receivers', 'orders.receiver', '=', 'receivers.id')
-            ->select( 'orders.*','orders_detail.line','customers.name as name_sender','receivers.name as name_receivers' )
+            ->select( 'orders.*','orders_detail.line','orders_detail.weight as cn','customers.name as name_sender','receivers.name as name_receivers' )
             ->latest('orders.created_at')->where(function ($query) use ($search){
                 $query->where('orders.order_id', 'like', '%'.$search.'%');
                   
@@ -43,7 +43,7 @@ class OrderController extends Controller
             $orders =  order::join('orders_detail', 'orders.id', '=', 'orders_detail.order_id')
             ->join('customers', 'orders.sender', '=', 'customers.id')
             ->join('receivers', 'orders.receiver', '=', 'receivers.id')
-            ->select( 'orders.*','orders_detail.line','customers.name as name_sender','receivers.name as name_receivers' )
+            ->select( 'orders.*','orders_detail.line','orders_detail.weight as cn','customers.name as name_sender','receivers.name as name_receivers' )
             ->latest('orders.created_at')
             ->orderby('orders_detail.line','ASC')
             ->paginate($row_per_page);
