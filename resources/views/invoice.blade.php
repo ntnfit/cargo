@@ -57,33 +57,37 @@
       </td>
     </tr>
     <tr>
-      <td colSpan=3 height="25" align="left" valign=middle class="mediumText">
+      <td colSpan=2 height="25" align="left" valign=middle class="mediumText">
         <u>From:</u> 
       </td>
+      <td></td>
       <td colSpan=3 align="left" valign=middle  class="mediumText">
         <p><u>To:</u> </p>
       </td>
     </tr>
     <tr>
-      <td colSpan=3 height="25" align="left" valign=middle  class="mediumText">
+      <td colSpan=2 height="25" align="left" valign=middle  class="mediumText">
         <u>Người gửi:</u> {{$orders->name_sender}}
       </td>
+      <td></td>
       <td colSpan=3 align="left" valign=middle class="mediumText">
         <u>Người nhận:</u> {{$orders->name_receivers}}
       </td>
     </tr>
     <tr>
-      <td colSpan=3 height="30" align="left" valign=top class="mediumText">
+      <td colSpan=2 height="30" align="left" valign=top class="mediumText">
         <u>Địa chỉ:</u> {{$orders->address_sender}}
       </td>
+      <td></td>
       <td colSpan=3 height="30" align="left" valign=top  class="mediumText">
         <u>Địa chỉ:</u> {{$orders->address_receivers}}
       </td>
     </tr>
     <tr>
-      <td colSpan=3 height="25" align="left" valign=top class="mediumText">
+      <td colSpan=2 height="25" align="left" valign=top class="mediumText">
         <u>Số điện thoại:</u> {{$orders->phone_sender}}
       </td>
+      <td></td>
       <td colSpan=3 align="left" valign=top  class="mediumText">
         <u>Số điện thoại:</u> {{$orders->phone_receivers}}
       </td>
