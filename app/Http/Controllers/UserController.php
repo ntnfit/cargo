@@ -14,6 +14,13 @@ use Illuminate\Support\Arr;
     
 class UserController extends Controller
 {
+    function __construct()
+    {
+         $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:user-create', ['only' => ['create','store']]);
+         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +28,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $agents=agent::all();
+        $agents=agent::where('active',0)->get();
         $roles = Role::pluck('name','name')->all();
         $data = User::orderBy('id','DESC')->paginate(10);
         return view('users.index',compact('data','roles','agents'))
@@ -89,7 +96,7 @@ class UserController extends Controller
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
-        $agents=agent::whereNotIn('id',[$user->agent_id])->get();
+        $agents=agent::where('active',0)->whereNotIn('id',[$user->agent_id])->get();
         $user_agent=agent::where('id',$user->agent_id)->first();
         return view('users.edit',compact('user','roles','userRole','agents','user_agent'));
     }

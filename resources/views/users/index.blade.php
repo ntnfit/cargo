@@ -141,9 +141,12 @@
                                 </td>
                                 <td>
                                 <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
-                                    {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-                                        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                                    {!! Form::close() !!}
+                                @can('user-delete')
+                                {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
+                                <button onclick="return confirm('Bạn có muốn xóa user này không?');"  type="submit" class="btn btn-danger"> Delete
+                                </button>  
+                                {!! Form::close() !!}
+                                 @endcan   
                                 </td>
                             </tr>
                          @endforeach

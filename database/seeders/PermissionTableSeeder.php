@@ -32,10 +32,13 @@ class PermissionTableSeeder extends Seeder
         //    'receiver-list',
         //    'receiver-edit',
         //    'receiver-delete'
-        'agent-list',
-        'agent-create',
-        'agent-edit',
-        'agent-delete'
+        // 'agent-list',
+        // 'agent-create',
+        // 'agent-edit',
+        // 'agent-delete',
+        // 'user-list',
+        // 'user-delete',
+        'user-create'
 
            
         ];
