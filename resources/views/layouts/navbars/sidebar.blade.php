@@ -1,3 +1,7 @@
+@php
+use App\Models\Infors;
+$infors= Infors::first();
+@endphp
 <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
     <div class="container-fluid">
         <!-- Toggler -->
@@ -6,7 +10,7 @@
         </button>
         <!-- Brand -->
         <a class="navbar-brand pt-0" href="{{ route('home') }}">
-            <img src="{{ asset('argon') }}/img/brand/blue.png" class="navbar-brand-img" alt="...">
+            <img src="{{asset($infors->logo)}}" style="max-height: 123px;width: 209px;" class="navbar-brand-img" alt="...">
         </a>
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
@@ -14,7 +18,7 @@
                 <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="media align-items-center">
                         <span class="avatar avatar-sm rounded-circle">
-                        <img alt="Image placeholder" src="{{ asset('argon') }}/img/theme/team-1-800x800.jpg">
+                        <img alt="Image placeholder" src="{{asset($infors->logo)}}">
                         </span>
                     </div>
                 </a>
@@ -68,12 +72,18 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
+                    <a class="nav-link" href="{{ route('agents.index') }}">
+                      <i class="ni ni-tv-2 text-orange"></i>
+                      <span class="nav-link-text">Agent</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active collapsed" href="#navbar-user" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-user">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
                         <span class="nav-link-text" style="color: #f4645f;">{{ __('User') }}</span>
                     </a>
 
-                    <div class="collapse show" id="navbar-examples">
+                    <div class="collapse" id="navbar-user">
                         <ul class="nav nav-sm flex-column">
                            
                            
@@ -88,12 +98,13 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
+                    <a class="nav-link active collapsed" href="#navbar-customer" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-customer">
+                    
                         <i class="ni ni-circle-08" style="color: #f4645f;"></i>
                         <span class="nav-link-text" style="color: #f4645f;">{{ __('Khách hàng') }}</span>
                     </a>
 
-                    <div class="collapse show" id="navbar-examples">
+                    <div class="collapse" id="navbar-customer">
                         <ul class="nav nav-sm flex-column">
                            
                            

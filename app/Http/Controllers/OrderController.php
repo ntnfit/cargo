@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\order;
+use App\Models\Agent;
 use App\Models\orderdetail;
 use DB;
 use Spatie\Permission\Models\Role;
@@ -80,8 +81,20 @@ class OrderController extends Controller
             'sender' => 'required',
             'deldate' => 'required',
         ]);
-        // 
-        $prefix="A-";
+
+        $agent_id = Auth::user()->agent;
+        print($agent_id);
+        exit;
+        $agent_code=Agent::where('id',$agent_id)->first();
+        if($agent_code)
+        {
+            $prefix=$agent_code->code."-";
+        }
+        else
+        {
+            $prefix="A-";
+        }
+        
             $subid= order::latest('id')->first();
             if(!$subid)
             {   
@@ -240,6 +253,10 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        orderdetail::where('order_id', $id)->delete();
+        order::find($id)->delete();
+      
+        return redirect()->route('orders.index')
+        ->with('success','Order deleted successfully'); 
     }
 }

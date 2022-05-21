@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use lluminate\Database\Eloquent;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Agent;
 use Spatie\Permission\Models\Role;
 use DB;
 use Hash;
@@ -20,10 +21,10 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        
+        $agents=agent::all();
         $roles = Role::pluck('name','name')->all();
         $data = User::orderBy('id','DESC')->paginate(10);
-        return view('users.index',compact('data','roles'))
+        return view('users.index',compact('data','roles','agents'))
             ->with('i', ($request->input('page', 1) - 1) * 10);
     }
     
@@ -34,6 +35,7 @@ class UserController extends Controller
      */
     public function create()
     {
+       
         $roles = Role::pluck('name','name')->all();
         return view('users.create',compact('roles'));
     }
@@ -50,7 +52,8 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'roles' => 'required'
+            'roles' => 'required',
+            'agent_id'=> 'required'
         ]);
     
         $input = $request->all();
@@ -86,8 +89,9 @@ class UserController extends Controller
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
-    
-        return view('users.edit',compact('user','roles','userRole'));
+        $agents=agent::whereNotIn('id',[$user->agent_id])->get();
+        $user_agent=agent::where('id',$user->agent_id)->first();
+        return view('users.edit',compact('user','roles','userRole','agents','user_agent'));
     }
     
     /**
@@ -107,6 +111,7 @@ class UserController extends Controller
         ]);
     
         $input = $request->all();
+       
         if(!empty($input['password'])){ 
             $input['password'] = Hash::make($input['password']);
         }else{

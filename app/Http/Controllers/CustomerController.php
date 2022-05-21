@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class CustomerController extends Controller
 {
     /**
@@ -11,9 +13,17 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+         $this->middleware('permission:customer-list|customer-create|customer-edit|customer-delete', ['only' => ['index','store','get_all']]);
+         $this->middleware('permission:customer-create', ['only' => ['create','store']]);
+         $this->middleware('permission:customer-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:customer-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
-        $customers=Customer::all();
+        $customers=Customer::where('active',0)->get();
         
         $option ="<option></option>";
       
@@ -29,6 +39,7 @@ class CustomerController extends Controller
         if($search!=""){
             $customer = Customer::where(function ($query) use ($search){
                 $query->where('phone', 'like', '%'.$search.'%')
+                        ->where('active',0)
                     ->orWhere('name', 'like', '%'.$search.'%');
             })
             ->paginate(25);
@@ -37,7 +48,7 @@ class CustomerController extends Controller
 
         else
         {
-            $customer= Customer::paginate(25);
+            $customer= Customer::where('active',0)->paginate(25);
 
         }
         return view('customer_recever.list_customer',compact('customer'))
@@ -124,6 +135,8 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Customer::find($id)->update(['active' => 1]);
+        return redirect()->route('listcustomer')
+        ->with('success','customer deleted successfully.');
     }
 }

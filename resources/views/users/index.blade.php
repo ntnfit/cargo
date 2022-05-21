@@ -1,5 +1,6 @@
 @extends('layouts.app')
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 @section('content')
     @include('layouts.headers.app')
     <div class="row">
@@ -7,7 +8,16 @@
             <div class="pull-left">
                 <h2>User</h2>
             </div>
-            
+@if (count($errors) > 0)
+  <div class="alert alert-danger">
+        <strong>Whoops!</strong>Something went wrong.<br><br>
+        <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    </div>
+@endif      
     
 <div class="container-fluid mt--7">
     <div class="row">
@@ -32,21 +42,8 @@
     
     <div class="card-body px-lg-5 py-lg-5">
         <div class="text-center text-muted mb-4">
-        @if (count($errors) > 0)
-  <div class="alert alert-danger">
-    <strong>Whoops!</strong>Something went wrong.<br><br>
-    <ul>
-       @foreach ($errors->all() as $error)
-         <li>{{ $error }}</li>
-       @endforeach
-    </ul>
-  </div>
-@endif
-
-
-
-{!! Form::open(array('route' => 'users.store','method'=>'POST')) !!}
 <div class="row">
+{!! Form::open(array('route' => 'users.store','method'=>'POST')) !!}
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Name:</strong>
@@ -56,13 +53,13 @@
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Email:</strong>
-            {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control','require')) !!}
+            {!! Form::text('email', null, array('placeholder' => 'Email','autocomplete'=>'off','class' => 'form-control','require')) !!}
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Password:</strong>
-            {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control')) !!}
+            {!! Form::password('password', array('placeholder' => 'Password','autocomplete'=>'off','class' => 'form-control')) !!}
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -72,16 +69,29 @@
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
             <strong>Role:</strong>
-            {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+            {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple','id'=>'role','style'=>'width:250px')) !!}
         </div>
     </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+            <strong>Agent:</strong>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">        
+    <select class="form-control" id="agent" name="agent_id" style="width:250px">
+            <option value="" selected></option>
+            @foreach($agents as $agent)
+            <option value="{{$agent->id}}">{{$agent->name}}</option>
+            @endforeach
+            </select>
+        </div>
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-</div>
 {!! Form::close() !!}
+</div>
+        </div>
     </div>
 </div>
 </div>
@@ -156,7 +166,21 @@
 </div>
   
 </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Select2 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script>
+$("#role").select2({
+    placeholder: "Select role",
+    allowClear: true,
+    role: 'combobox'
+  });
+  $("#agent").select2({
+    placeholder: "Select agent",
+    allowClear: true,
+    role: 'combobox'
+  });
+  </script>
     @include('layouts.footers.auth')
 @endsection
 

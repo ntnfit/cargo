@@ -82,18 +82,24 @@
                 <td>{{$order->created_at}}</td>
                 <td>
                
-                    <form action="/orders/{{$order->id}}/edit" method="POST">
+                    <form action="/orders/{{$order->id}}/edit" method="POST" style="display:inline;">
                    
                      <a href="invoice/{{$order->id}}"><i class="fa-solid fa-file-invoice"></i></a>
                         <a href="./orders/{{$order->id}}/edit">
                             <i class="fas fa-edit  fa-lg"></i>
                         </a>
                     </form>
+                    
                     <style>
                         .a{font-size: 13px;}
                     </style>
-                </td>
-               
+                    @can('order-delete')
+                    {!! Form::open(['method' => 'DELETE','route' => ['orders.destroy', $order->id],'style'=>'display:inline']) !!}
+                    <button onclick="return confirm('Bạn có muốn xóa đơn hàng này không?');"  type="submit" class="btn-danger">
+                    <i class="fa-solid fa-trash"></i>
+                    </button>  
+                      {!! Form::close() !!}
+                    @endcan
             </tr>
         @endforeach
     </table>

@@ -20,7 +20,7 @@
                                 </button>
                             </span>
                         </a>
-                        <input type="text" class="form-control mr-3" name="term" placeholder="Search Order" id="term">
+                        <input type="text" class="form-control mr-3" name="term" placeholder="nhập tên agent" id="term">
                         <span class="input-group-btn mr-4  mt-1">
                             <button class="btn btn-info" type="submit" title="Search Order">
                                 <span class="fas fa-search"></span>
@@ -34,7 +34,7 @@
     </div>
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Order Cargo </h2>
+                <h2>Agent Cargo </h2>
             </div>
             
         </div>
@@ -48,40 +48,43 @@
         {{session('success')}}
     </div>
     @endif
+    <div class="col-8 text-left">
+                            <a class="btn btn-sm btn-primary" href="{{ route('agents.create') }}">Tạo Agent</a>               
+    </div>
     <table class="table table-bordered table-responsive-lg" style="margin-left: 15px;">
         <tr>
             
             <th>No</th>
             <th>Tên</th>
+            <th>Code</th>
             <th>Phone</th>
             <th>Địa chỉ</th>
-            <th>Ngày tạo</th>
             <th>Action</th>
         </tr>
         @php
         $count=1
         @endphp
-        @foreach ($receiver as $receiver)
+        @foreach ($agents as $agent)
             <tr>
                
                 <td>{{$count++}}</td>
-                <td>{{$receiver->name}}</td>
-                <td>{{$receiver->phone}}</td>
-                <td>{{$receiver->address}}</td>
-                <td>{{$receiver->created_at}}</td>
+                <td>{{$agent->name}}</td>
+                <td>{{$agent->code}}</td>
+                <td>{{$agent->phone}}</td>
+                <td>{{$agent->address}}</td>
                 <td>
                
-                    <form action="/receivers/{{$receiver->id}}/edit" method="POST" style="display:inline ;">
-                        <a href="./receivers/{{$receiver->id}}/edit">
+                    <form action="/agents/{{$agent->id}}/edit" method="POST" style="display:inline ;">
+                        <a href="./agents/{{$agent->id}}/edit">
                             <i class="fas fa-edit  fa-lg"></i>
                         </a>
                     </form>
                     <style>
                         .a{font-size: 13px;}
                     </style>
-                     @can('receiver-delete')
-                    {!! Form::open(['method' => 'DELETE','route' => ['receivers.destroy', $receiver->id],'style'=>'display:inline']) !!}
-                    <button onclick="return confirm('Bạn có muốn người nhận này không?');"  type="submit" class="btn-danger">
+                     @can('agent-delete')
+                    {!! Form::open(['method' => 'DELETE','route' => ['agents.destroy', $agent->id],'style'=>'display:inline']) !!}
+                    <button onclick="return confirm('Bạn có muốn xóa agent này không?');"  type="submit" class="btn-danger">
                     <i class="fa-solid fa-trash"></i>
                     </button>  
                       {!! Form::close() !!}

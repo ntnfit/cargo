@@ -11,6 +11,14 @@ class ReceiverController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct()
+    {
+         $this->middleware('permission:receiver-list|receiver-create|receiver-edit|receiver-delete', ['only' => ['index','store','get_all']]);
+         $this->middleware('permission:receiver-create', ['only' => ['create','store']]);
+         $this->middleware('permission:receiver-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:receiver-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         
@@ -21,6 +29,7 @@ class ReceiverController extends Controller
         if($search!=""){
             $receiver = Receiver::where(function ($query) use ($search){
                 $query->where('phone', 'like', '%'.$search.'%')
+                    ->where('active',0)
                     ->orWhere('name', 'like', '%'.$search.'%');
             })
             ->paginate(25);
@@ -28,7 +37,7 @@ class ReceiverController extends Controller
         }
         else
         {
-            $receiver= Receiver::paginate(25);
+            $receiver= Receiver::where('active',0)->paginate(25);
         }
     
         return view('customer_recever.list_receiver',compact('receiver'))
@@ -81,7 +90,7 @@ class ReceiverController extends Controller
      */
     public function show($id)
     {
-        $receivers=Receiver::where('customer_id',$id)->get();;
+        $receivers=Receiver::where('customer_id',$id)->where('active',0)->get();;
         $option ="'<option></option>";
         foreach($receivers as $receiver)
         {
@@ -126,6 +135,8 @@ class ReceiverController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Receiver::find($id)->update(['active' => 1]);
+        return redirect()->route('listreceiver')
+        ->with('success','receiver deleted successfully.');
     }
 }

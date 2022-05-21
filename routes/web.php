@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\RoleController;
@@ -61,6 +62,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('labels',[LabelController::class,'label']);
 	//shipment
 	Route::resource('mawb',MawbController::class);
+	//agents
+	Route::resource('agents',AgentController::class);
 	
 });
 Route::post('receiver',[ReceiverController::class,'store'])->name('postre');

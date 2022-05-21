@@ -42,7 +42,7 @@
                 <td>{{$Infor->phone}}</td>
                 <td>{{$Infor->email}}</td>
                 <td>
-                    <img src="{{asset($Infor->logo)}}" alt="logo" style="max-height:100px"></td>
+                    <img src="{{asset($infors->logo)}}" alt="logo" style="max-height:100px"></td>
                 <td>
                     <form action="/infor/{{$Infor->id}}/edit" method="POST">
                         <a href="./infor/{{$Infor->id}}/edit">

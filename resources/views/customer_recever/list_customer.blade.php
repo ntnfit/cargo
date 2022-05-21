@@ -71,7 +71,7 @@
                 <td>{{$customer->created_at}}</td>
                 <td>
                
-                    <form action="/customers/{{$customer->id}}/edit" method="POST">
+                    <form action="/customers/{{$customer->id}}/edit" method="POST" style="display:inline ;">
                         <a href="./customers/{{$customer->id}}/edit">
                             <i class="fas fa-edit  fa-lg"></i>
                         </a>
@@ -79,6 +79,13 @@
                     <style>
                         .a{font-size: 13px;}
                     </style>
+                     @can('customer-delete')
+                    {!! Form::open(['method' => 'DELETE','route' => ['customers.destroy', $customer->id],'style'=>'display:inline']) !!}
+                    <button onclick="return confirm('Bạn có muốn người gửi này không?');"  type="submit" class="btn-danger">
+                    <i class="fa-solid fa-trash"></i>
+                    </button>  
+                      {!! Form::close() !!}
+                    @endcan
                 </td>
                
             </tr>
