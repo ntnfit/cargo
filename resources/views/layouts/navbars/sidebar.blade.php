@@ -71,12 +71,15 @@ $infors= Infors::first();
                         <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
                     </a>
                 </li>
+                @can('agent-list')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('agents.index') }}">
                       <i class="ni ni-tv-2 text-orange"></i>
                       <span class="nav-link-text">Agent</span>
                     </a>
                 </li>
+                @endcan
+                @can('user-list')
                 <li class="nav-item">
                     <a class="nav-link active collapsed" href="#navbar-user" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-user">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
@@ -97,6 +100,8 @@ $infors= Infors::first();
                         </ul>
                     </div>
                 </li>
+                @endcan
+                @canany(['customer-list','receiver-list'])
                 <li class="nav-item">
                     <a class="nav-link active collapsed" href="#navbar-customer" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-customer">
                     
@@ -109,16 +114,19 @@ $infors= Infors::first();
                            
                            
                             <li class="nav-item">
-                                
+                                @can('customer-list')
                                 <a class="nav-link" href="{{ route('listcustomer') }}">
                                     {{ __('người gửi') }}
                                 </a>
+                                @endcan
+                                @can('receiver-list')
                                 <a class="nav-link" href="{{ route('listreceiver') }}">người nhận</a>
+                                @endcan
                             </li>
                         </ul>
                     </div>
                 </li>
-                
+                @endcan
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="{{ route('icons') }}">
                         <i class="ni ni-planet text-blue"></i> {{ __('Icons') }}
@@ -135,19 +143,22 @@ $infors= Infors::first();
                       <span class="nav-link-text">Tables</span>
                     </a>
                 </li> -->
-               
+               @can('infor-list')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('infor.index') }}">
                       <i class="ni ni-shop text-orange"></i>
                       <span class="nav-link-text">Infor Cargo</span>
                     </a>
                 </li>
+                @endcan
+                @can('order-list')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('orders.index') }}">
                       <i class="ni ni-bag-17 text-red"></i>
                       <span class="nav-link-text">Orders</span>
                     </a>
                 </li>
+                @endcan
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('mawb.index') }}">
                       <i class="ni ni-archive-2 text-yellow"></i>
