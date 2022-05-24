@@ -27,20 +27,20 @@ class ReceiverController extends Controller
     { 
         $search =  $request->input('term');
         if($search!=""){
-            $receiver = Receiver::where(function ($query) use ($search){
+            $receivers = Receiver::where(function ($query) use ($search){
                 $query->where('phone', 'like', '%'.$search.'%')
                     ->where('active',0)
                     ->orWhere('name', 'like', '%'.$search.'%');
             })
             ->paginate(25);
-            $receiver->appends(['term' => $search]);
+            $receivers->appends(['term' => $search]);
         }
         else
         {
-            $receiver= Receiver::where('active',0)->paginate(25);
+            $receivers= Receiver::where('active',0)->paginate(25);
         }
     
-        return view('customer_recever.list_receiver',compact('receiver'))
+        return view('customer_recever.list_receiver',compact('receivers'))
             ->with('i', (request()->input('page', 1) - 1) * 25);
     }
 

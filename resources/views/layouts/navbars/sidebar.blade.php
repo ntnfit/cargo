@@ -79,7 +79,7 @@ $infors= Infors::first();
                     </a>
                 </li>
                 @endcan
-                @can('user-list')
+                @canany(['user-list','role-list'])
                 <li class="nav-item">
                     <a class="nav-link active collapsed" href="#navbar-user" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-user">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
@@ -91,11 +91,14 @@ $infors= Infors::first();
                            
                            
                             <li class="nav-item">
-                                
+                                @can('user-list')
                                 <a class="nav-link" href="{{ route('user.index') }}">
                                     {{ __('User Management') }}
                                 </a>
+                                @endcan
+                                @can('role-list')
                                 <a class="nav-link" href="{{ route('roles.index') }}">Manage Role</a>
+                                @endcan
                             </li>
                         </ul>
                     </div>

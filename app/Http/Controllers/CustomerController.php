@@ -37,21 +37,21 @@ class CustomerController extends Controller
     { 
         $search =  $request->input('term');
         if($search!=""){
-            $customer = Customer::where(function ($query) use ($search){
+            $customers = Customer::where(function ($query) use ($search){
                 $query->where('phone', 'like', '%'.$search.'%')
                         ->where('active',0)
                     ->orWhere('name', 'like', '%'.$search.'%');
             })
             ->paginate(25);
-            $customer->appends(['term' => $search]);
+            $customers->appends(['term' => $search]);
         }
 
         else
         {
-            $customer= Customer::where('active',0)->paginate(25);
+            $customers= Customer::where('active',0)->paginate(25);
 
         }
-        return view('customer_recever.list_customer',compact('customer'))
+        return view('customer_recever.list_customer',compact('customers'))
         ->with('i', (request()->input('page', 1) - 1) * 25);
         
     }

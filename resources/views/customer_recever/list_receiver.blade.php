@@ -61,7 +61,7 @@
         @php
         $count=1
         @endphp
-        @foreach ($receiver as $receiver)
+        @foreach ($receivers as $receiver)
             <tr>
                
                 <td>{{$count++}}</td>
@@ -91,7 +91,7 @@
             </tr>
         @endforeach
     </table>
- 
+    {{ $receivers->links('pagination')}}
     @include('layouts.footers.auth')
 @endsection
 

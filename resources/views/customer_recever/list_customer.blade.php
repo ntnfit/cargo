@@ -61,7 +61,7 @@
         @php
         $count=1
         @endphp
-        @foreach ($customer as $customer)
+        @foreach ($customers as $customer)
             <tr>
                
                 <td>{{$count++}}</td>
@@ -91,7 +91,7 @@
             </tr>
         @endforeach
     </table>
- 
+    {{ $customers->links('pagination')}}
     @include('layouts.footers.auth')
 @endsection
 

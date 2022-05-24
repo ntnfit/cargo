@@ -12,22 +12,10 @@ class Mawb extends Model
     protected $table = 'mawb';
     
     protected $fillable = [
-        'route',
-        'master',
-        'destination',
-        'value',
-        'note',
-        'shipdate',
-        'no',
-        'airline',
-        'flight_no',
-        'flight_departure_date',
-        'flight_from_city',
-        'connect_flight_no',
-        'connect_flight_departure_date',
-        'connect_light_departure_from',
-        'airport',
-        'destination_city',
-        'destination_country'
+        'name',
+        'code',
+        'date_inventory',
+        'code_flight',
+        'active'
     ];
 }

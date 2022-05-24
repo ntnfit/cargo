@@ -31,15 +31,15 @@
                             <div class="col">
                                 <div class="card-profile-stats d-flex justify-content-center mt-md-5">
                                     <div>
-                                        <span class="heading">22</span>
+                                        <span class="heading">0</span>
                                         <span class="description">{{ __('Friends') }}</span>
                                     </div>
                                     <div>
-                                        <span class="heading">10</span>
+                                        <span class="heading">0</span>
                                         <span class="description">{{ __('Photos') }}</span>
                                     </div>
                                     <div>
-                                        <span class="heading">89</span>
+                                        <span class="heading">0</span>
                                         <span class="description">{{ __('Comments') }}</span>
                                     </div>
                                 </div>
@@ -47,19 +47,19 @@
                         </div>
                         <div class="text-center">
                             <h3>
-                                {{ auth()->user()->name }}<span class="font-weight-light">, 27</span>
+                                {{ auth()->user()->name }}<span class="font-weight-light"></span>
                             </h3>
                             <div class="h5 font-weight-300">
-                                <i class="ni location_pin mr-2"></i>{{ __('Bucharest, Romania') }}
+                                <i class="ni location_pin mr-2"></i>{{ __('Cargo') }}
                             </div>
                             <div class="h5 mt-4">
-                                <i class="ni business_briefcase-24 mr-2"></i>{{ __('Solution Manager - Creative Tim Officer') }}
+                                <i class="ni business_briefcase-24 mr-2"></i>
                             </div>
                             <div>
-                                <i class="ni education_hat mr-2"></i>{{ __('University of Computer Science') }}
+                                <i class="ni education_hat mr-2"></i>
                             </div>
                             <hr class="my-4" />
-                            <p>{{ __('Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.') }}</p>
+                            <p></p>
                             <a href="#">{{ __('Show more') }}</a>
                         </div>
                     </div>

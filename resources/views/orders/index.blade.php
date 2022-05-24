@@ -110,15 +110,19 @@
         <h5 class="modal-title">Choose MAWB</h5>
       </div>
       <div class="modal-body">
-        <select name="" id="list_mawb" class="form-select">
+          <form action="{{route('xuatkho')}}" method="post">
+          @csrf
+        <select name="kho" id="list_mawb" class="form-select">
              <option value=""></option>
-            <option value="292">292</option>
-            <option value="293">293</option>
+             @foreach($mawbs as $mawb)
+            <option value="{{$mawb->id}}">{{$mawb->name}}</option>
+            @endforeach
         </select>
-      </div>
       <div class="modal-footer">
         <button id="close" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" id ="mawb" class="btn btn-primary">Save changes</button>
+        <button type="submit" id ="mawb" class="btn btn-primary">Save changes</button>
+      </div>
+      </form>
       </div>
     </div>
   </div>
@@ -157,8 +161,8 @@ var selectedRows = function () {
 // call function process MAWB
     $('#mawb').on('click', function() {
     var ids = selectedRows().join();
-    console.log(ids);
-    //deleteItem(ids);
+    var ids = selectedRows().join();
+    document.cookie = `mawb=`+ids;
     });
     $('#label').on('click', function() {
     var ids = selectedRows().join();
@@ -166,7 +170,7 @@ var selectedRows = function () {
     console.log(ids);
     window.open(
   'http://dainamcargo.com/labels',
-  '_blank' // <- This is what makes it open in a new window.
+  '_blank' 
 );
     //deleteItem(ids);
     });
@@ -179,7 +183,7 @@ var selectedRows = function () {
     else
     {
         document.getElementById("process").disabled = true;
-        document.getElementById("label").disabled = false;
+        document.getElementById("label").disabled = true;
     }
     });
       $("#list_mawb").select2({

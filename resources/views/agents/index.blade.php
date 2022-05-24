@@ -94,7 +94,7 @@
             </tr>
         @endforeach
     </table>
- 
+    {{ $agents->links('pagination')}}
     @include('layouts.footers.auth')
 @endsection
 

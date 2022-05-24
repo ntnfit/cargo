@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\order;
 use App\Models\Agent;
+use App\Models\Mawb;
 use App\Models\orderdetail;
 use DB;
 use Spatie\Permission\Models\Role;
@@ -33,7 +34,8 @@ class OrderController extends Controller
             ->join('receivers', 'orders.receiver', '=', 'receivers.id')
             ->select( 'orders.*','orders_detail.line','orders_detail.weight as cn','customers.name as name_sender','receivers.name as name_receivers' )
             ->latest('orders.created_at')->where(function ($query) use ($search){
-                $query->where('orders.order_id', 'like', '%'.$search.'%');
+                $query->where('orders.order_id', 'like', '%'.$search.'%')
+                ->where('orders_detail.kho',0);
                   
             }) ->orderby('orders_detail.line','ASC')
             ->paginate($row_per_page);
@@ -45,12 +47,13 @@ class OrderController extends Controller
             ->join('customers', 'orders.sender', '=', 'customers.id')
             ->join('receivers', 'orders.receiver', '=', 'receivers.id')
             ->select( 'orders.*','orders_detail.line','orders_detail.weight as cn','customers.name as name_sender','receivers.name as name_receivers' )
+            ->where('orders_detail.kho',0)
             ->latest('orders.created_at')
             ->orderby('orders_detail.line','ASC')
             ->paginate($row_per_page);
         }
-                     
-        return view('orders.index',compact('orders'))
+        $mawbs= Mawb::where('active',0)->latest()->get();     
+        return view('orders.index',compact('orders','mawbs'))
             ->with('start_no', (request()->input('page', 1) - 1) * $row_per_page + 1);
     }
 
@@ -82,9 +85,8 @@ class OrderController extends Controller
             'deldate' => 'required',
         ]);
 
+        $table = DB::select("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA ='".env("DB_DATABASE")."' AND TABLE_NAME = 'orders'");
         $agent_id = Auth::user()->agent;
-        print($agent_id);
-        exit;
         $agent_code=Agent::where('id',$agent_id)->first();
         if($agent_code)
         {
@@ -103,7 +105,7 @@ class OrderController extends Controller
             }
             else
             {
-                $subid=$subid->id+1;
+                $subid=$table[0]->AUTO_INCREMENT;
                 $code=$prefix.str_pad( $subid,5,'0',STR_PAD_LEFT);
             }
           
@@ -130,9 +132,8 @@ class OrderController extends Controller
       
         $order = order::create( $data);
         $orderID = $order->id;
-            
-       // return redirect()->route('products.index')
-       //                 ->with('success','Product created successfully.');
+        $code=$prefix.str_pad( $orderID,5,'0',STR_PAD_LEFT);
+        $order = order::where('id',$orderID)->update(array('order_id'=>$code));
         $datadetail=[];
         $line=1;
         foreach ($request->order as $orders){
@@ -191,7 +192,16 @@ class OrderController extends Controller
        
         //data processing
         $data=[];
-        $prefix="A-";
+        $agent_id = Auth::user()->agent;
+        $agent_code=Agent::where('id',$agent_id)->first();
+        if($agent_code)
+        {
+            $prefix=$agent_code->code."-";
+        }
+        else
+        {
+            $prefix="A-";
+        }
         $code=$prefix.str_pad( $id,5,'0',STR_PAD_LEFT);
         $data['order_id']=$code;
         $data['shipdate']=$request->shipdate;

@@ -62,6 +62,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('labels',[LabelController::class,'label']);
 	//shipment
 	Route::resource('mawb',MawbController::class);
+	Route::post('xuatkho',[MawbController::class,'xuatkho'])->name('xuatkho');
+	Route::get('huyxuat/{id}',[MawbController::class,'cancel'])->name('cancel');
 	//agents
 	Route::resource('agents',AgentController::class);
 	

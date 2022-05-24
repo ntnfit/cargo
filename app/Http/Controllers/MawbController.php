@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Mawb;
+use Spatie\Permission\Models\Permission;
+use App\Models\orderdetail;
+use App\Models\Mawb;
+use App\Models\order;
 class MawbController extends Controller
 {
     function __construct()
@@ -15,10 +18,9 @@ class MawbController extends Controller
     }
     public function index(Request $request)
     {
-        $mawb= Mawb::latest()->paginate(15);
-
-        return view('mawb.index', compact('mawb'))
-            ->with('i', (request()->input('page', 1) - 1) * 15);
+        $mawbs= Mawb::where('active',0)->latest()->paginate(25);
+        return view('mawb.index', compact('mawbs'))
+            ->with('i', (request()->input('page', 1) - 1) * 25);
     }
 
     /**
@@ -31,7 +33,65 @@ class MawbController extends Controller
         $permission = Permission::get();
         return view('mawb.create',compact('permission'));
     }
+    public function cancel(Request $request,$id)
+    {
+        try{
+            if(empty($request->item))
+        {
+            return response()->json([
+                'data'=>$request->item,
+                'error' => true
+              ]);
+        }
+        else
+        {
+            $ids = $request->item;
+            $arrID = explode(',', $ids);
+            foreach($arrID as $key => $id )
+            {
+            orderdetail::where('order_id',(int)substr($id,2,7))->where('line',(int)substr($id,8))->update( array('kho'=>0));
+            }
+            return response()->json([
+                'data'=>$id,
+                'success' => true
+              ]);
+        }
 
+        }
+        catch(\Exception $e)
+        {
+            return $e->getMessage();
+        }
+        
+
+    }
+    public function xuatkho(Request $request)
+    {
+        try{
+            if( !isset($_COOKIE['mawb']))
+        {
+            return redirect()->route('home');
+        }
+        else
+        {
+            $ids = $_COOKIE['mawb'];
+            $arrID = explode(',', $ids);
+            foreach($arrID as $key => $id )
+            {
+            orderdetail::where('order_id',(int)substr($id,2,7))->where('line',(int)substr($id,8))->update( array('kho'=>$request->kho));
+            }
+            return redirect()->route('orders.index')
+                    ->with('success',' Xuất kho thành công.');
+        }
+
+        }
+        catch(\Exception $e)
+        {
+            return $e->getMessage();
+        }
+        
+   
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -40,63 +100,23 @@ class MawbController extends Controller
      */
     public function store(Request $request)
     {
-        // 'route',
-        // 'master',
-        // 'destination',
-        // 'value',
-        // 'note',
-        // 'shipdate',
-        // 'no',
-        // 'airline',
-        // 'flight_no',
-        // 'flight_departure_date',
-        // 'flight_from_city',
-        // 'connect_flight_no',
-        // 'connect_flight_departure_date',
-        // 'connect_light_departure_from',
-        // 'airport',
-        // 'destination_city',
-        // 'destination_country',
-        // $this->validate($request, [
-        //     'weight' => 'required',
-        //     'receiver' => 'required',
-        //     'sender' => 'required',
-        //     'package' => 'required',
-        //     'deldate' => 'required',
-        //     'order'=>'required'
-           
-        // ]);
+        $this->validate($request, [
+            'name' => 'required',
+            'code' => 'required|unique:mawb',
+            'date_inventory' => 'required',
+            'code_flight' => 'required'
+           ]);
     
-        // // 
-        // $prefix="A-";
-        //     $subid= order::latest('id')->first();
-        //     if(!$subid)
-        //     {   
-        //         $subid=1;
-        //         $code=$prefix.str_pad( $subid,5,'0',STR_PAD_LEFT);
-        //     }
-        //     else
-        //     {
-        //         $subid=$subid->id+1;
-        //         $code=$prefix.str_pad( $subid,5,'0',STR_PAD_LEFT);
-        //     }
-          
-        // //data processing
-        // $data=[];
-        // $data['order_id']=$code;
-        // $data['shipdate']=$request->shipdate;
-        // $data['deldate']=$request->deldate;
-        // $data['sender'] =$request->sender;
-        // $data['receiver']=$request->receiver;
-        // $data['remark']=$request->remark;
-        // $data['value_order']=$request->value_order;
-        // $data['weight']=$request->weight;
-        // $data['tax']=$request->tax;
-        // $data['discount']=$request->discount;
-        // $data['total']=$request->value_order+$request->tax - $request->discount;
-        // $order = order::create( $data);
-        // return redirect()->route('orders.index')
-        // ->with('success','Product created successfully.');
+        // data processing
+        $data=[];
+        $data['name']=$request->name;
+        $data['code']=$request->code;
+        $data['date_inventory'] =$request->date_inventory;
+        $data['code_flight']=$request->code_flight;
+
+        $mawb = mawb::create( $data);
+        return redirect()->route('mawb.index')
+        ->with('success','Product created successfully.');
     }
 
     /**
@@ -107,7 +127,17 @@ class MawbController extends Controller
      */
     public function show($id)
     {
-        //
+        $row_per_page = 25;
+        $orders =  order::join('orders_detail', 'orders.id', '=', 'orders_detail.order_id')
+            ->join('customers', 'orders.sender', '=', 'customers.id')
+            ->join('receivers', 'orders.receiver', '=', 'receivers.id')
+            ->select( 'orders.*','orders_detail.line','orders_detail.weight as cn','customers.name as name_sender','receivers.name as name_receivers' )
+            ->where('orders_detail.kho',$id)
+            ->latest('orders.created_at')
+            ->orderby('orders_detail.line','ASC')
+            ->paginate($row_per_page);
+            return view('mawb.show',compact('orders','id'))
+            ->with('start_no', (request()->input('page', 1) - 1) * $row_per_page + 1);
     }
 
     /**
@@ -141,7 +171,7 @@ class MawbController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
     
 }
