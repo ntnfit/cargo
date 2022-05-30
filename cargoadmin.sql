@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 30, 2022 lúc 02:40 PM
--- Phiên bản máy phục vụ: 10.4.22-MariaDB
--- Phiên bản PHP: 8.1.1
+-- Host: 127.0.0.1
+-- Generation Time: May 30, 2022 at 02:47 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `cargo`
+-- Database: `cargo`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `agents`
+-- Table structure for table `agents`
 --
 
 CREATE TABLE `agents` (
@@ -39,7 +39,7 @@ CREATE TABLE `agents` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `agents`
+-- Dumping data for table `agents`
 --
 
 INSERT INTO `agents` (`id`, `name`, `code`, `phone`, `address`, `active`, `created_at`, `updated_at`) VALUES
@@ -51,7 +51,7 @@ INSERT INTO `agents` (`id`, `name`, `code`, `phone`, `address`, `active`, `creat
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `customers`
+-- Table structure for table `customers`
 --
 
 CREATE TABLE `customers` (
@@ -65,7 +65,7 @@ CREATE TABLE `customers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `customers`
+-- Dumping data for table `customers`
 --
 
 INSERT INTO `customers` (`id`, `name`, `phone`, `address`, `created_at`, `updated_at`, `active`) VALUES
@@ -81,7 +81,7 @@ INSERT INTO `customers` (`id`, `name`, `phone`, `address`, `created_at`, `update
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `failed_jobs`
+-- Table structure for table `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -97,7 +97,7 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `infos`
+-- Table structure for table `infos`
 --
 
 CREATE TABLE `infos` (
@@ -113,7 +113,7 @@ CREATE TABLE `infos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `infos`
+-- Dumping data for table `infos`
 --
 
 INSERT INTO `infos` (`id`, `name`, `icon`, `logo`, `phone`, `location`, `email`, `created_at`, `updated_at`) VALUES
@@ -122,7 +122,7 @@ INSERT INTO `infos` (`id`, `name`, `icon`, `logo`, `phone`, `location`, `email`,
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `mawb`
+-- Table structure for table `mawb`
 --
 
 CREATE TABLE `mawb` (
@@ -137,7 +137,7 @@ CREATE TABLE `mawb` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `mawb`
+-- Dumping data for table `mawb`
 --
 
 INSERT INTO `mawb` (`id`, `name`, `code`, `date_inventory`, `code_flight`, `active`, `created_at`, `updated_at`) VALUES
@@ -147,7 +147,7 @@ INSERT INTO `mawb` (`id`, `name`, `code`, `date_inventory`, `code_flight`, `acti
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `migrations`
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -157,7 +157,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -177,7 +177,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `model_has_permissions`
+-- Table structure for table `model_has_permissions`
 --
 
 CREATE TABLE `model_has_permissions` (
@@ -189,7 +189,7 @@ CREATE TABLE `model_has_permissions` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `model_has_roles`
+-- Table structure for table `model_has_roles`
 --
 
 CREATE TABLE `model_has_roles` (
@@ -199,7 +199,7 @@ CREATE TABLE `model_has_roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `model_has_roles`
+-- Dumping data for table `model_has_roles`
 --
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
@@ -210,7 +210,7 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `orders`
+-- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
@@ -232,7 +232,7 @@ CREATE TABLE `orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `orders`
+-- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`id`, `order_id`, `shipdate`, `deldate`, `sender`, `receiver`, `remark`, `weight`, `value_order`, `tax`, `discount`, `total`, `service`, `created_at`, `updated_at`) VALUES
@@ -258,7 +258,7 @@ INSERT INTO `orders` (`id`, `order_id`, `shipdate`, `deldate`, `sender`, `receiv
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `orders_detail`
+-- Table structure for table `orders_detail`
 --
 
 CREATE TABLE `orders_detail` (
@@ -274,7 +274,7 @@ CREATE TABLE `orders_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `orders_detail`
+-- Dumping data for table `orders_detail`
 --
 
 INSERT INTO `orders_detail` (`id`, `order_id`, `description`, `weight`, `line`, `status`, `kho`, `created_at`, `updated_at`) VALUES
@@ -298,7 +298,7 @@ INSERT INTO `orders_detail` (`id`, `order_id`, `description`, `weight`, `line`, 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `password_resets`
+-- Table structure for table `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -310,7 +310,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `permissions`
+-- Table structure for table `permissions`
 --
 
 CREATE TABLE `permissions` (
@@ -322,7 +322,7 @@ CREATE TABLE `permissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `permissions`
+-- Dumping data for table `permissions`
 --
 
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
@@ -348,12 +348,17 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 (20, 'agent-delete', 'web', '2022-05-21 01:09:22', '2022-05-21 01:09:22'),
 (21, 'user-list', 'web', '2022-05-21 09:04:22', '2022-05-21 09:04:22'),
 (22, 'user-delete', 'web', '2022-05-21 09:04:22', '2022-05-21 09:04:22'),
-(23, 'user-create', 'web', '2022-05-21 09:05:30', '2022-05-21 09:05:30');
+(23, 'user-create', 'web', '2022-05-21 09:05:30', '2022-05-21 09:05:30'),
+(24, 'mawb-cancel', 'web', '2022-05-30 05:46:10', '2022-05-30 05:46:10'),
+(25, 'mawb-create', 'web', '2022-05-30 05:46:10', '2022-05-30 05:46:10'),
+(26, 'mawb-edit', 'web', '2022-05-30 05:46:10', '2022-05-30 05:46:10'),
+(27, 'mawb-list', 'web', '2022-05-30 05:46:10', '2022-05-30 05:46:10'),
+(28, 'mawb-delete', 'web', '2022-05-30 05:46:10', '2022-05-30 05:46:10');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `personal_access_tokens`
+-- Table structure for table `personal_access_tokens`
 --
 
 CREATE TABLE `personal_access_tokens` (
@@ -371,7 +376,7 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `receivers`
+-- Table structure for table `receivers`
 --
 
 CREATE TABLE `receivers` (
@@ -386,7 +391,7 @@ CREATE TABLE `receivers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `receivers`
+-- Dumping data for table `receivers`
 --
 
 INSERT INTO `receivers` (`id`, `customer_id`, `name`, `phone`, `address`, `created_at`, `updated_at`, `active`) VALUES
@@ -398,7 +403,7 @@ INSERT INTO `receivers` (`id`, `customer_id`, `name`, `phone`, `address`, `creat
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `roles`
+-- Table structure for table `roles`
 --
 
 CREATE TABLE `roles` (
@@ -410,7 +415,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `roles`
+-- Dumping data for table `roles`
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
@@ -420,7 +425,7 @@ INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VAL
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `role_has_permissions`
+-- Table structure for table `role_has_permissions`
 --
 
 CREATE TABLE `role_has_permissions` (
@@ -429,7 +434,7 @@ CREATE TABLE `role_has_permissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `role_has_permissions`
+-- Dumping data for table `role_has_permissions`
 --
 
 INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
@@ -460,12 +465,17 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (20, 2),
 (21, 2),
 (22, 2),
-(23, 2);
+(23, 2),
+(24, 2),
+(25, 2),
+(26, 2),
+(27, 2),
+(28, 2);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -481,7 +491,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `agent_id`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
@@ -490,88 +500,88 @@ INSERT INTO `users` (`id`, `name`, `email`, `agent_id`, `email_verified_at`, `pa
 (5, 'employee', 'employee@cargo.com', 2, NULL, '$2y$10$1MVxw99gAAhXo2Cw8DCCZOVCjtQc168syX38JqDR6cHavFcBoa1Sq', NULL, '2022-05-21 07:44:58', '2022-05-21 09:19:04');
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `agents`
+-- Indexes for table `agents`
 --
 ALTER TABLE `agents`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `customers`
+-- Indexes for table `customers`
 --
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `failed_jobs`
+-- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Chỉ mục cho bảng `infos`
+-- Indexes for table `infos`
 --
 ALTER TABLE `infos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `mawb`
+-- Indexes for table `mawb`
 --
 ALTER TABLE `mawb`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `migrations`
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `model_has_permissions`
+-- Indexes for table `model_has_permissions`
 --
 ALTER TABLE `model_has_permissions`
   ADD PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
   ADD KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`);
 
 --
--- Chỉ mục cho bảng `model_has_roles`
+-- Indexes for table `model_has_roles`
 --
 ALTER TABLE `model_has_roles`
   ADD PRIMARY KEY (`role_id`,`model_id`,`model_type`),
   ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
 
 --
--- Chỉ mục cho bảng `orders`
+-- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `orders_detail`
+-- Indexes for table `orders_detail`
 --
 ALTER TABLE `orders_detail`
   ADD PRIMARY KEY (`id`),
   ADD KEY `orders_detail_order_id_foreign` (`order_id`);
 
 --
--- Chỉ mục cho bảng `password_resets`
+-- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Chỉ mục cho bảng `permissions`
+-- Indexes for table `permissions`
 --
 ALTER TABLE `permissions`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`);
 
 --
--- Chỉ mục cho bảng `personal_access_tokens`
+-- Indexes for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
@@ -579,145 +589,145 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Chỉ mục cho bảng `receivers`
+-- Indexes for table `receivers`
 --
 ALTER TABLE `receivers`
   ADD PRIMARY KEY (`id`),
   ADD KEY `receiver_customer_id_foreign` (`customer_id`);
 
 --
--- Chỉ mục cho bảng `roles`
+-- Indexes for table `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`);
 
 --
--- Chỉ mục cho bảng `role_has_permissions`
+-- Indexes for table `role_has_permissions`
 --
 ALTER TABLE `role_has_permissions`
   ADD PRIMARY KEY (`permission_id`,`role_id`),
   ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
 
 --
--- Chỉ mục cho bảng `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `agents`
+-- AUTO_INCREMENT for table `agents`
 --
 ALTER TABLE `agents`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT cho bảng `customers`
+-- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT cho bảng `failed_jobs`
+-- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `infos`
+-- AUTO_INCREMENT for table `infos`
 --
 ALTER TABLE `infos`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT cho bảng `mawb`
+-- AUTO_INCREMENT for table `mawb`
 --
 ALTER TABLE `mawb`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT cho bảng `migrations`
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT cho bảng `orders`
+-- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
--- AUTO_INCREMENT cho bảng `orders_detail`
+-- AUTO_INCREMENT for table `orders_detail`
 --
 ALTER TABLE `orders_detail`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
--- AUTO_INCREMENT cho bảng `permissions`
+-- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT cho bảng `personal_access_tokens`
+-- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `receivers`
+-- AUTO_INCREMENT for table `receivers`
 --
 ALTER TABLE `receivers`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT cho bảng `roles`
+-- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT cho bảng `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `model_has_permissions`
+-- Constraints for table `model_has_permissions`
 --
 ALTER TABLE `model_has_permissions`
   ADD CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE;
 
 --
--- Các ràng buộc cho bảng `model_has_roles`
+-- Constraints for table `model_has_roles`
 --
 ALTER TABLE `model_has_roles`
   ADD CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 
 --
--- Các ràng buộc cho bảng `orders_detail`
+-- Constraints for table `orders_detail`
 --
 ALTER TABLE `orders_detail`
   ADD CONSTRAINT `orders_detail_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
 
 --
--- Các ràng buộc cho bảng `receivers`
+-- Constraints for table `receivers`
 --
 ALTER TABLE `receivers`
   ADD CONSTRAINT `receiver_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
 
 --
--- Các ràng buộc cho bảng `role_has_permissions`
+-- Constraints for table `role_has_permissions`
 --
 ALTER TABLE `role_has_permissions`
   ADD CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,

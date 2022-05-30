@@ -38,8 +38,12 @@ class PermissionTableSeeder extends Seeder
         // 'agent-delete',
         // 'user-list',
         // 'user-delete',
-        'user-create'
-
+        //'user-create',
+        // 'mawb-cancel',
+        // 'mawb-create',
+        // 'mawb-edit',
+        // 'mawb-list',
+        // 'mawb-delete',
            
         ];
      

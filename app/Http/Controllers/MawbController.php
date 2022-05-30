@@ -14,7 +14,11 @@ class MawbController extends Controller
 {
     function __construct()
     {
-         //check permission 
+        $this->middleware('permission:mawb-list|mawb-create|mawb-edit|mawb-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:mawb-create', ['only' => ['create','store']]);
+        $this->middleware('permission:mawb-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:mawb-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:mawb-cancel', ['only' => ['cancel','cancel_button']]);
     }
     public function index(Request $request)
     {
