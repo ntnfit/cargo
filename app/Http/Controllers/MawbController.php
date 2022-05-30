@@ -18,9 +18,20 @@ class MawbController extends Controller
     }
     public function index(Request $request)
     {
-        $mawbs= Mawb::where('active',0)->latest()->paginate(25);
+        $search =  $request->input('term');
+        if($search!=""){
+            $mawbs = Mawb::where('active',0)->where(function ($query) use ($search){
+                $query->where('name', 'like', '%'.$search.'%');
+            })
+            ->paginate(25);
+            $mawbs->appends(['term' => $search]);
+        }
+        else{
+            $mawbs= Mawb::where('active',0)->latest()->paginate(25);
+        }
         return view('mawb.index', compact('mawbs'))
-            ->with('i', (request()->input('page', 1) - 1) * 25);
+        ->with('i', (request()->input('page', 1) - 1) * 25);
+      
     }
 
     /**
@@ -32,6 +43,13 @@ class MawbController extends Controller
     {
         $permission = Permission::get();
         return view('mawb.create',compact('permission'));
+    }
+    public function cancel_button (Request $request,$id)
+    {
+      $Mawb =orderdetail::where('order_id',$id)->where('line',$request->line)->first();
+      orderdetail::where('order_id',$id)->where('line',$request->line)->update( array('kho'=>0));   
+      return redirect()->route('mawb.show',$Mawb->kho)
+                    ->with('success',' Hủy xuất kho thành công.');      
     }
     public function cancel(Request $request,$id)
     {
@@ -103,8 +121,8 @@ class MawbController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'code' => 'required|unique:mawb',
-            'date_inventory' => 'required',
-            'code_flight' => 'required'
+            // 'date_inventory' => 'required',
+            // 'code_flight' => 'required'
            ]);
     
         // data processing
@@ -125,10 +143,26 @@ class MawbController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,$id)
     {
         $row_per_page = 25;
-        $orders =  order::join('orders_detail', 'orders.id', '=', 'orders_detail.order_id')
+        $search =  $request->input('term');
+        if($search!=""){
+            $orders =  order::join('orders_detail', 'orders.id', '=', 'orders_detail.order_id')
+            ->join('customers', 'orders.sender', '=', 'customers.id')
+            ->join('receivers', 'orders.receiver', '=', 'receivers.id')
+            ->select( 'orders.*','orders_detail.line','orders_detail.weight as cn','customers.name as name_sender','receivers.name as name_receivers' )
+            ->where('orders_detail.kho',$id)
+            ->where(function ($query) use ($search){
+                $query->where('orders.order_id', 'like', '%'.$search.'%');
+            })
+            ->latest('orders.created_at')
+            ->orderby('orders_detail.line','ASC')
+            ->paginate($row_per_page);
+        }
+        else
+        {
+            $orders =  order::join('orders_detail', 'orders.id', '=', 'orders_detail.order_id')
             ->join('customers', 'orders.sender', '=', 'customers.id')
             ->join('receivers', 'orders.receiver', '=', 'receivers.id')
             ->select( 'orders.*','orders_detail.line','orders_detail.weight as cn','customers.name as name_sender','receivers.name as name_receivers' )
@@ -136,6 +170,9 @@ class MawbController extends Controller
             ->latest('orders.created_at')
             ->orderby('orders_detail.line','ASC')
             ->paginate($row_per_page);
+        }
+
+       
             return view('mawb.show',compact('orders','id'))
             ->with('start_no', (request()->input('page', 1) - 1) * $row_per_page + 1);
     }
@@ -148,7 +185,8 @@ class MawbController extends Controller
      */
     public function edit($id)
     {
-       
+        $mawbs= Mawb::where('id',$id)->first();
+        return view('mawb.edit',compact('mawbs'));
     }
 
     /**
@@ -160,7 +198,22 @@ class MawbController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $this->validate($request, [
+            'name' => 'required',
+            'code' => 'required',
+            // 'date_inventory' => 'required',
+            // 'code_flight' => 'required'
+           ]);
+    
+        $mawb = Mawb::find($id);
+        $mawb->name = $request->input('name');
+        $mawb->code = $request->input('code');
+        $mawb->date_inventory = $request->input('date_inventory');
+        $mawb->code_flight=$request->input('code_flight');
+        $mawb->save();
+    
+        return redirect()->route('mawb.index')
+                        ->with('success','Role updated successfully');
     }
 
     /**
@@ -171,7 +224,9 @@ class MawbController extends Controller
      */
     public function destroy($id)
     {
-        
+        Mawb::find($id)->update(['active' => 1]);
+        return redirect()->route('mawb.index')
+        ->with('success','Mawb deleted successfully.');
     }
     
 }

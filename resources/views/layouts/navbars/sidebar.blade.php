@@ -36,7 +36,7 @@ $infors= Infors::first();
             </li>
         </ul>
         <!-- Collapse -->
-        <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+        <div class="collapse navbar-collapse" id="sidenav-collapse-main" style="margin-top: -63px;">
             <!-- Collapse header -->
             <div class="navbar-collapse-header d-md-none">
                 <div class="row">

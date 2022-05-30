@@ -11,10 +11,10 @@
     <div>
         <div class="mx-auto pull-right" style="margin-left: 1rem!important;">
             <div class="">
-                <form action="{{ route('mawb.index') }}" method="GET" role="search">
+                <form action="{{ route('mawb.show',$id) }}" method="GET" role="search">
 
                     <div class="input-group">
-                    <a href="{{ route('mawb.index') }}" class=" mr-2 mt-1">
+                    <a href="{{ route('mawb.show',$id) }}" class=" mr-2 mt-1">
                             <span class="input-group-btn">
                                 <button class="btn btn-danger" type="button" title="Refresh page">
                                     <span class="fas fa-sync-alt"></span>
@@ -50,7 +50,8 @@
     </div>
     @endif
     <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('agents.index') }}"> Back </a>
+            <a class="btn btn-primary" href="{{ route('mawb.index') }}"> Back </a>
+            <a class="btn btn-info" href="{{ route('lable_buton',$id) }}">In All label</a>
     </div>
     <div class="col-4 text-right">
                            
@@ -67,8 +68,7 @@
             <th>Người gửi</th>
             <th>Người nhận</th>
             <th>Cận nặng</th>
-            <th>Giá trị</th>
-            <th>Ngày tạo</th>
+            <th>Action</th>
         </tr>
         @foreach ($orders as $order)
             <tr>
@@ -81,8 +81,15 @@
                 <td>{{$order->name_sender}}</td>
                 <td>{{$order->name_receivers}}</td>
                 <td>{{$order->cn}}</td>
-                <td>{{$order->total}}</td>
-                <td>{{$order->created_at}}</td>
+                <td>
+                <form action="{{ route('cancel_button',$order->id) }}" method="POST">
+                    @csrf
+                       
+                        <input type="text" name = "line"value="{{$order->line}}" hidden>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+             
+                </form>
+                </td>
             </tr>
         @endforeach
     </table>

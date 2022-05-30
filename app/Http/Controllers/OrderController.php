@@ -83,8 +83,8 @@ class OrderController extends Controller
             'receiver' => 'required',
             'sender' => 'required',
             'deldate' => 'required',
+            'order' => 'required'
         ]);
-
         $table = DB::select("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA ='".env("DB_DATABASE")."' AND TABLE_NAME = 'orders'");
         $agent_id = Auth::user()->agent;
         $agent_code=Agent::where('id',$agent_id)->first();
@@ -143,9 +143,12 @@ class OrderController extends Controller
             $datadetail['line']=$line++;
             orderdetail::create($datadetail);
         }
-       
-        return redirect()->route('orders.index')
+    
+        return redirect()->route('orders.edit', $orderID)
+       // return redirect()->route('orders.index')
         ->with('success','Product created successfully.');
+    
+      
     }
 
     /**

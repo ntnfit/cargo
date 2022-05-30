@@ -60,9 +60,11 @@ Route::group(['middleware' => 'auth'], function () {
 	//Invoice and label.
 	Route::get('invoice/{id}',[InvoiceController::class,'print']);
 	Route::get('labels',[LabelController::class,'label']);
+	Route::get('labels/{id}',[LabelController::class,'label_all'])->name('lable_buton');
 	//shipment
 	Route::resource('mawb',MawbController::class);
 	Route::post('xuatkho',[MawbController::class,'xuatkho'])->name('xuatkho');
+	Route::post('huyxuat-button/{id}',[MawbController::class,'cancel_button'])->name('cancel_button');
 	Route::get('huyxuat/{id}',[MawbController::class,'cancel'])->name('cancel');
 	//agents
 	Route::resource('agents',AgentController::class);

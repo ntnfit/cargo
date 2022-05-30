@@ -8,7 +8,8 @@
 @section('content')
 @include('layouts.headers.app')
 <div class="pull-right">
-  <a class="btn btn-primary" href="{{ route('orders.index') }}"> Back </a>
+  <a class="btn btn-primary" href="{{ route('orders.index') }}"> Trở lại </a>
+  <a class="btn btn-warning" href="/invoice/{{$order->id}}"> In hóa đơn</a>
 </div>
 <div class="container">
   <div class="row">

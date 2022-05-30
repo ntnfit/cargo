@@ -6,7 +6,7 @@
 @section('content')
     @include('layouts.headers.app')
     <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('agents.index') }}"> Back </a>
+            <a class="btn btn-primary" href="{{ route('mawb.index') }}"> Back </a>
     </div>
     @if (count($errors) > 0)
     <div class="alert alert-danger">
@@ -20,7 +20,7 @@
 @endif
 
 <div class="container">
-  <h1>Tạo Agent</h1>
+  <h1>Tạo Kho</h1>
   <div class="row">
     {!! Form::open(array('route' => 'mawb.store','method'=>'POST')) !!}
       @csrf
